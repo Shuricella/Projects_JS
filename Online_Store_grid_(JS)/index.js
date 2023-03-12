@@ -21,8 +21,8 @@ export default class OnlineStorePage {
         // добавляем параметр "products" к адресу "beckendUrl"
         // необходимо поменять this.url на this.productsurl
         // будет еще this.Categoryurl и this.Brandurl
-        this.url = new URL("products", backendUrl);
-        this.url.searchParams.set("_limit", this.pageSize);
+        this.urlProducts = new URL("products", backendUrl);
+        this.urlProducts.searchParams.set("_limit", this.pageSize);
         
         this.components = {};
 
@@ -38,9 +38,9 @@ export default class OnlineStorePage {
     }
 
     async loadData(pageNumber) {
-        this.url.searchParams.set("_page", pageNumber);
+        this.urlProducts.searchParams.set("_page", pageNumber);
 
-        const response = await fetch(this.url);
+        const response = await fetch(this.urlProducts);
         const products = await response.json();
 
         // fetch(url)
@@ -52,26 +52,26 @@ export default class OnlineStorePage {
         return products;
     }
 
-                                async totalEl() {
-                                    let urlTotalPage = new URL(this.url);
+                                                                async totalElements() {
+                                                                    let urlTotalPage = new URL(this.urlProducts);
 
-                                    urlTotalPage.searchParams.delete("_limit");
-                                    urlTotalPage.searchParams.delete("_page");
-                                    
-                                    const response = await fetch(urlTotalPage);
-                                    const products = await response.json();
-                                    
-                                    let totalElements = products.length / 2;
-                                    
-                                    return totalElements;
-                                }
+                                                                    urlTotalPage.searchParams.delete("_limit");
+                                                                    urlTotalPage.searchParams.delete("_page");
+                                                                    
+                                                                    const response = await fetch(urlTotalPage);
+                                                                    const products = await response.json();
+                                                                    
+                                                                    let totalElements = products.length / 2;
+                                                                    
+                                                                    return totalElements;
+                                                                }
 
-                                async calcTotalPages() {
-                                    const totalElements = await this.totalEl();
-                                    const totalPages = Math.ceil(totalElements / this.pageSize);
+                                                                async calcTotalPages() {
+                                                                    const totalElements = await this.totalElements();
+                                                                    const totalPages = Math.ceil(totalElements / this.pageSize);
 
-                                    return totalPages;
-                                }
+                                                                    return totalPages;
+                                                                }
 
     getTemplate() {
         return `
@@ -137,24 +137,24 @@ export default class OnlineStorePage {
         })
     }
 
-                                            initEventListenersFilters() {
-                                                this.components.filtersList.element.addEventListener("category-brand", event => {
-                                                    let nameBlock = event.detail.nameBlock;
-                                                    let filters = event.detail.filters;
-                                                    let stateElement = event.detail.state;
+    initEventListenersFilters() {
+        this.components.filtersList.element.addEventListener("category-brand", event => {
+            let nameBlock = event.detail.nameBlock;
+            let filters = event.detail.filters;
+            let stateElement = event.detail.state;
 
-                                                    console.log("nameBlock=", nameBlock, "filters=", filters, "stateElement=", stateElement);
+            console.log("nameBlock=", nameBlock, "filters=", filters, "stateElement=", stateElement);
 
-                                                    if(stateElement) {
-                                                        this.url.searchParams.set(nameBlock, filters);
-                                                    }
-                                                    else{
-                                                        this.url.searchParams.delete(nameBlock);
-                                                    }
-                                                    this.components.pagination.setPage(0);
-                                                    this.update(1);
-                                                })
-                                            }
+            if(stateElement) {
+                this.urlProducts.searchParams.set(nameBlock, filters);
+            }
+            else{
+                this.urlProducts.searchParams.delete(nameBlock);
+            }
+            this.components.pagination.setPage(0);
+            this.update(1);
+        })
+    }
 
     async update(pageNumber) {
         // этот метод реализует логику отрисовки
@@ -165,7 +165,5 @@ export default class OnlineStorePage {
         const data = await this.loadData(pageNumber);
         
         this.components.cardsList.update(data);
-
-        // this.components.pagination.update(7);
     }
 }

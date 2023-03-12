@@ -4,14 +4,9 @@ export default class Pagination {
 
         this.totalPages = totalPages;
 
-        // this.update();
-
         this.render();
 
         this.addEventListeners();
-
-        
-        
     }
 
     getTemplate() {
@@ -50,7 +45,7 @@ export default class Pagination {
             </ul>
         `;
     }
-                                                                                // active
+                                                                                
     getPageTemplate(pageIndex = 0) {
         const isActive = (pageIndex === this.activePageIndex ? "active" : "");
         return `
