@@ -1,6 +1,8 @@
 export default class FiltersList {
     constructor() {
         this.render();
+
+        this.addEventListeners();
     }
 
     getTemplate() {
@@ -29,10 +31,10 @@ export default class FiltersList {
                 
                         <form action="#">
                 
-                            <ul class="blocks-cat-list">
+                            <ul class="blocks-cat-list" data-category-list="category">
                             
                                 <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-category-monitors" class="cursor-filter-list" name="category" value="category=monitors">
+                                    <input type="checkbox" id="blocks-category-monitors" class="cursor-filter-list" name="category" value="monitors">
                                     <label for="blocks-category-monitors" class="cursor-filter-list none-style-filters text-color-filters">Monitors</label>
                                 </li>
                                 
@@ -83,67 +85,67 @@ export default class FiltersList {
                 
                         <form action="#">
                 
-                            <ul class="blocks-cat-list">
+                            <ul class="blocks-cat-list" data-brand-list="brand">
                 
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-asus" class="cursor-filter-list" name="brand" value="brand=asus">
-                                <label for="blocks-brand-asus" class="cursor-filter-list none-style-filters text-color-filters">Asus</label>
-                            </li>
-                
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-acer" class="cursor-filter-list" name="brand" value="brand=acer">
-                                <label for="blocks-brand-acer" class="cursor-filter-list none-style-filters text-color-filters">Acer</label>
-                            </li>
-                
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-apple" class="cursor-filter-list" name="brand" value="brand=apple">
-                                <label for="blocks-brand-apple" class="cursor-filter-list none-style-filters text-color-filters">Apple</label>
-                            </li>
-                
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-dell" class="cursor-filter-list" name="brand" value="brand=dell">
-                                <label for="blocks-brand-dell" class="cursor-filter-list none-style-filters text-color-filters">Dell</label>
-                            </li>
-                
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-dynamode" class="cursor-filter-list" name="brand" value="brand=dynamode">
-                                <label for="blocks-brand-dynamode" class="cursor-filter-list none-style-filters text-color-filters">Dynamode</label>
-                            </li>
-                
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-gigabyte" class="cursor-filter-list" name="brand" value="brand=gigabyte">
-                                <label for="blocks-brand-gigabyte" class="cursor-filter-list none-style-filters text-color-filters">Gigabyte</label>
-                            </li>
-                
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-kingston" class="cursor-filter-list" name="brand" value="brand=kingston">
-                                <label for="blocks-brand-kingston" class="cursor-filter-list none-style-filters text-color-filters">Kingston</label>
-                            </li>
-                
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-lenovo" class="cursor-filter-list" name="brand" value="brand=lenovo">
-                                <label for="blocks-brand-lenovo" class="cursor-filter-list none-style-filters text-color-filters">Lenovo</label>
-                            </li>
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-asus" class="cursor-filter-list" name="brand" value="brand=asus">
+                                    <label for="blocks-brand-asus" class="cursor-filter-list none-style-filters text-color-filters">Asus</label>
+                                </li>
                     
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-logitech" class="cursor-filter-list" name="brand" value="brand=logitech">
-                                <label for="blocks-brand-logitech" class="cursor-filter-list none-style-filters text-color-filters">Logitech</label>
-                            </li>
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-acer" class="cursor-filter-list" name="brand" value="brand=acer">
+                                    <label for="blocks-brand-acer" class="cursor-filter-list none-style-filters text-color-filters">Acer</label>
+                                </li>
                     
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-msi" class="cursor-filter-list" name="brand" value="brand=msi">
-                                <label for="blocks-brand-msi" class="cursor-filter-list none-style-filters text-color-filters">MSI</label>
-                            </li>
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-apple" class="cursor-filter-list" name="brand" value="brand=apple">
+                                    <label for="blocks-brand-apple" class="cursor-filter-list none-style-filters text-color-filters">Apple</label>
+                                </li>
                     
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-benq" class="cursor-filter-list" name="brand" value="brand=benq">
-                                <label for="blocks-brand-benq" class="cursor-filter-list none-style-filters text-color-filters">BenQ</label>
-                            </li>
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-dell" class="cursor-filter-list" name="brand" value="brand=dell">
+                                    <label for="blocks-brand-dell" class="cursor-filter-list none-style-filters text-color-filters">Dell</label>
+                                </li>
                     
-                            <li class="blocks-cat-br">
-                                <input type="checkbox" id="blocks-brand-a4tech" class="cursor-filter-list" name="brand" value="brand=a4tech">
-                                <label for="blocks-brand-a4tech" class="cursor-filter-list none-style-filters text-color-filters">A4Tech</label>
-                            </li>
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-dynamode" class="cursor-filter-list" name="brand" value="brand=dynamode">
+                                    <label for="blocks-brand-dynamode" class="cursor-filter-list none-style-filters text-color-filters">Dynamode</label>
+                                </li>
+                    
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-gigabyte" class="cursor-filter-list" name="brand" value="brand=gigabyte">
+                                    <label for="blocks-brand-gigabyte" class="cursor-filter-list none-style-filters text-color-filters">Gigabyte</label>
+                                </li>
+                    
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-kingston" class="cursor-filter-list" name="brand" value="brand=kingston">
+                                    <label for="blocks-brand-kingston" class="cursor-filter-list none-style-filters text-color-filters">Kingston</label>
+                                </li>
+                    
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-lenovo" class="cursor-filter-list" name="brand" value="brand=lenovo">
+                                    <label for="blocks-brand-lenovo" class="cursor-filter-list none-style-filters text-color-filters">Lenovo</label>
+                                </li>
+                        
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-logitech" class="cursor-filter-list" name="brand" value="brand=logitech">
+                                    <label for="blocks-brand-logitech" class="cursor-filter-list none-style-filters text-color-filters">Logitech</label>
+                                </li>
+                        
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-msi" class="cursor-filter-list" name="brand" value="brand=msi">
+                                    <label for="blocks-brand-msi" class="cursor-filter-list none-style-filters text-color-filters">MSI</label>
+                                </li>
+                        
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-benq" class="cursor-filter-list" name="brand" value="brand=benq">
+                                    <label for="blocks-brand-benq" class="cursor-filter-list none-style-filters text-color-filters">BenQ</label>
+                                </li>
+                        
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-brand-a4tech" class="cursor-filter-list" name="brand" value="brand=a4tech">
+                                    <label for="blocks-brand-a4tech" class="cursor-filter-list none-style-filters text-color-filters">A4Tech</label>
+                                </li>
                 
                             </ul>
                 
@@ -184,6 +186,27 @@ export default class FiltersList {
         // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
     }
-}
 
- 
+    addEventListeners() {
+        const categoryList = this.element.querySelector('[data-category-list="category"]');
+        // const brandList = this.element.querySelector('[data-brand-list="brand"]');
+        
+        categoryList.addEventListener("click", event => {
+            const filtersCategory = event.target.closest('.blocks-cat-br input');
+            
+            if(filtersCategory === null) return;
+             
+            let stateElement = filtersCategory.checked;
+            let block = "category";
+            let filtersName = filtersCategory.value;
+            
+            this.dispatchEvent(block, filtersName, stateElement);
+        });
+    }
+
+    dispatchEvent(block, filtersName, stateElement) {
+        const customEvent = new CustomEvent("category-brand", {detail:{nameBlock:block, filters:filtersName, state:stateElement}});
+
+        this.element.dispatchEvent(customEvent);
+    }
+}

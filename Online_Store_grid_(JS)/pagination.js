@@ -4,9 +4,13 @@ export default class Pagination {
 
         this.totalPages = totalPages;
 
+        // this.update();
+
         this.render();
 
         this.addEventListeners();
+
+        
         
     }
 
@@ -35,6 +39,7 @@ export default class Pagination {
     getPages() {
         // Создадим массив Array с кол-ом элеменотов defaultPagesSize и заполним его 1
         // map вернет нам новый массив с элементами pagination через запятую
+        
         return `
             <ul class="page-list non-styles" data-element="pagination">
                 ${new Array(this.totalPages).fill(1).map((item, index) => {
@@ -87,12 +92,14 @@ export default class Pagination {
 
     render() {
         const wrapper = document.createElement("section");
-
+        // wrapper.innerHTML = "";
         wrapper.innerHTML = this.getTemplate();
 
         // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
     }
+
+    
 
     addEventListeners() {
        const prevPageBtn = this.element.querySelector('[data-element="nav-prev"]');
@@ -118,10 +125,17 @@ export default class Pagination {
 
        
     }
-
+    
     dispatchEvent(pageIndex) {
         const customEvent = new CustomEvent("page-changed", {detail:pageIndex});
-
+       
         this.element.dispatchEvent(customEvent);
     }
+
+    // update(foo) {
+    //     this.totalPages = foo;
+    //     this.getTemplate();
+        
+    // }
+    
 }
