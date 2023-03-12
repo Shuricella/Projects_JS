@@ -14,7 +14,7 @@ export default class OnlineStorePage {
         // указываем, что products = [] по умолчанию пустой массив
         this.products = [];
         
-        // this.totalElements = 100;
+        this.totalElements = 100;
         
         
         
@@ -25,9 +25,6 @@ export default class OnlineStorePage {
         this.url.searchParams.set("_limit", this.pageSize);
         
         this.components = {};
-
-        // this.calcTotalPages();
-        this.totalPages = 12;
 
         this.initComponents();
         this.render();
@@ -60,14 +57,12 @@ export default class OnlineStorePage {
 
                                     urlTotalPage.searchParams.delete("_limit");
                                     urlTotalPage.searchParams.delete("_page");
-                                    // console.log("urlTotalPage=", urlTotalPage);
-
+                                    
                                     const response = await fetch(urlTotalPage);
                                     const products = await response.json();
                                     
                                     let totalElements = products.length / 2;
                                     
-                                    // console.log("totalEl=", totalElements);
                                     return totalElements;
                                 }
 
@@ -75,11 +70,7 @@ export default class OnlineStorePage {
                                     const totalElements = await this.totalEl();
                                     const totalPages = Math.ceil(totalElements / this.pageSize);
 
-                                    // console.log("calcTotalPages=", totalPages);
-                                    
-                                    
                                     return totalPages;
-
                                 }
 
     getTemplate() {
@@ -103,14 +94,14 @@ export default class OnlineStorePage {
     initComponents() {
         // Зададим колличиство элементов в объекте products
         
-        // const totalPages = Math.ceil(this.totalElements / this.pageSize);
+        const totalPages = Math.ceil(this.totalElements / this.pageSize);
      
         // const cardsList = new CardsList(this.products.slice(0, this.pageSize));
         
         const cardsList = new CardsList(this.products);
         const pagination = new Pagination({
             activePageIndex: 0,
-            totalPages: this.totalPages
+            totalPages: totalPages
         });
         const filtersList = new FiltersList();
 
@@ -160,7 +151,7 @@ export default class OnlineStorePage {
                                                     else{
                                                         this.url.searchParams.delete(nameBlock);
                                                     }
-                                                    // this.components.pagination.setPage(0);
+                                                    this.components.pagination.setPage(0);
                                                     this.update(1);
                                                 })
                                             }

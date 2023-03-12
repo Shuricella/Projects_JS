@@ -92,7 +92,7 @@ export default class Pagination {
 
     render() {
         const wrapper = document.createElement("section");
-        // wrapper.innerHTML = "";
+        
         wrapper.innerHTML = this.getTemplate();
 
         // помещаем элемент в наш обьект
@@ -131,11 +131,5 @@ export default class Pagination {
        
         this.element.dispatchEvent(customEvent);
     }
-
-    // update(foo) {
-    //     this.totalPages = foo;
-    //     this.getTemplate();
-        
-    // }
     
 }
