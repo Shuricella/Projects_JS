@@ -13,15 +13,16 @@ export default class OnlineStorePage {
 
         // указываем, что products = [] по умолчанию пустой массив
         this.products = [];
+        this.categories = [];
+        this.brands = [];
         
         this.totalElements = 100;
-        
-        
-        
+               
         // добавляем параметр "products" к адресу "beckendUrl"
-        // необходимо поменять this.url на this.productsurl
-        // будет еще this.Categoryurl и this.Brandurl
         this.urlProducts = new URL("products", backendUrl);
+        this.urlCategories = new URL("categories", backendUrl);
+        this.urlBrands = new URL("brands", backendUrl);
+
         this.urlProducts.searchParams.set("_limit", this.pageSize);
         
         this.components = {};
@@ -35,6 +36,8 @@ export default class OnlineStorePage {
         this.initEventListenersFilters();
 
         this.update(1);
+
+        this.updateCategoriesBrand();
     }
 
     async loadData(pageNumber) {
@@ -50,6 +53,20 @@ export default class OnlineStorePage {
         // });
         
         return products;
+    }
+
+    async loadDataCategories() {
+        const response = await fetch(this.urlCategories);
+        const categories = await response.json();
+        
+        return categories;
+    }
+
+    async loadDataBrands() {
+        const response = await fetch(this.urlBrands);
+        const brands = await response.json();
+        
+        return brands;
     }
 
                                                                 async totalElements() {
@@ -93,7 +110,7 @@ export default class OnlineStorePage {
 
     initComponents() {
         // Зададим колличиство элементов в объекте products
-        
+       
         const totalPages = Math.ceil(this.totalElements / this.pageSize);
      
         // const cardsList = new CardsList(this.products.slice(0, this.pageSize));
@@ -103,7 +120,7 @@ export default class OnlineStorePage {
             activePageIndex: 0,
             totalPages: totalPages
         });
-        const filtersList = new FiltersList();
+        const filtersList = new FiltersList(this.categories, this.brands);
 
         this.components.cardsList = cardsList;
         this.components.pagination = pagination;
@@ -163,7 +180,16 @@ export default class OnlineStorePage {
         // const end = start + this.pageSize;
         // const data = this.products.slice(start, end);
         const data = await this.loadData(pageNumber);
-        
+                
         this.components.cardsList.update(data);
+    }
+
+    async updateCategoriesBrand() {
+        const dataCategories = await this.loadDataCategories();
+        const dataBrands = await this.loadDataBrands();
+        
+        this.components.filtersList.update(dataCategories, dataBrands);
+
+        
     }
 }

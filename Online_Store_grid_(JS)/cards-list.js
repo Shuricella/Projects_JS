@@ -20,7 +20,7 @@ export default class CardsList {
         const wrapper = document.createElement("section");
 
         wrapper.innerHTML = this.getTemplate();
-
+        
         // помещаем элемент в наш обьект
         this.element = wrapper;
     }
@@ -28,7 +28,7 @@ export default class CardsList {
     renderCards() {
         const cards = this.data.map(item => {
             const card = new Card(item);
-
+            
             return card.element;
         });
 

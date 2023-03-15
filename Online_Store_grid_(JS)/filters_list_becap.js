@@ -1,12 +1,6 @@
 export default class FiltersList {
-    constructor(dataCategories = [], dataBrands = []) {
-        this.dataCategories = dataCategories;
-
-        this.dataBrands = dataBrands;
-
+    constructor() {
         this.render();
-
-        this.renderCategories();
 
         this.addEventListeners();
     }
@@ -37,7 +31,48 @@ export default class FiltersList {
                 
                         <form action="#">
                 
-                            ${this.getCategories()}
+                            <ul class="blocks-cat-list" data-category-list="category">
+                            
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-category-monitors" class="cursor-filter-list" name="category" value="monitors">
+                                    <label for="blocks-category-monitors" class="cursor-filter-list none-style-filters text-color-filters">Monitors</label>
+                                </li>
+                                
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-category-laptops" class="cursor-filter-list" name="category" value="category=laptops">
+                                    <label for="blocks-category-laptops" class="cursor-filter-list none-style-filters text-color-filters">LapTops</label>
+                                </li>
+                    
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-category-video-cards" class="cursor-filter-list" name="category" value="category=video_cards">
+                                    <label for="blocks-category-video-cards" class="cursor-filter-list none-style-filters text-color-filters">Video cards</label>
+                                </li>
+                    
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-category-gaming-keyboards" class="cursor-filter-list" name="category" value="category=gaming_keyboards">
+                                    <label for="blocks-category-gaming-keyboards" class="cursor-filter-list none-style-filters text-color-filters">Gaming keyboards</label>
+                                </li>
+                    
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-category-computer-mouse" class="cursor-filter-list" name="category" value="category=computer_mouse">
+                                    <label for="blocks-category-computer-mouse" class="cursor-filter-list none-style-filters text-color-filters">Computer mouse</label>
+                                </li>
+                        
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-category-ssd" class="cursor-filter-list" name="category" value="category=ssd">
+                                    <label for="blocks-category-ssd" class="cursor-filter-list none-style-filters text-color-filters">SSD</label>
+                                </li>
+                        
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-category-sound-cards" class="cursor-filter-list" name="category" value="category=sound_cards">
+                                    <label for="blocks-category-sound-cards" class="cursor-filter-list none-style-filters text-color-filters">Sound cards</label>
+                                </li>
+                        
+                                <li class="blocks-cat-br">
+                                    <input type="checkbox" id="blocks-category-ram" class="cursor-filter-list" name="category" value="category=ram">
+                                    <label for="blocks-category-ram" class="cursor-filter-list none-style-filters text-color-filters">RAM</label>
+                                </li>
+                            </ul>
                 
                         </form>
             
@@ -143,23 +178,6 @@ export default class FiltersList {
         `;
     }
 
-    getCategories() {
-        return `
-            <ul class="blocks-cat-list" data-category-list="category">
-                
-            </ul>
-        `
-    }
-
-    getCategoriesTemplate(item) {
-        return `
-            <li class="blocks-cat-br">
-                <input type="checkbox" id="blocks-category-${item}" class="cursor-filter-list" name="category" value="${item}">
-                <label for="blocks-category-${item}" class="cursor-filter-list none-style-filters text-color-filters">${item}</label>
-            </li>
-        `
-    }
-
     render() {
         const wrapper = document.createElement("div");
 
@@ -167,25 +185,6 @@ export default class FiltersList {
 
         // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
-    }
-
-    renderCategories() {
-        const categori = this.dataCategories.map(item => {
-            const name = item.toLowerCase().split(" ").join("_");
-            return this.getCategoriesTemplate(name);
-        }).join("");
-
-        const body = this.element.querySelector('[data-category-list="category"]');
-
-        body.innerHTML = categori;
-    }
-
-    update(dataCategories = [], dataBrands = []) {
-        // обновим список карточек data
-        this.dataCategories = dataCategories;
-        this.dataBrands = dataBrands;
-
-        this.renderCategories();
     }
 
     addEventListeners() {
