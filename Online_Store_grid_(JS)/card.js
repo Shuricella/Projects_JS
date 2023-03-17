@@ -33,7 +33,7 @@ export default class Card {
                 </div>
 
                 <div class="block-type">
-                    <p>${this.state.brand}</p>
+                    <p>${this.state.category}</p>
                 </div>
 
                 </section>

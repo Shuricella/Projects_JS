@@ -6,7 +6,7 @@ export default class FiltersList {
 
         this.render();
 
-        this.renderCategories();
+        this.renderCategoriesBrands();
 
         this.addEventListeners();
     }
@@ -50,69 +50,7 @@ export default class FiltersList {
                 
                         <form action="#">
                 
-                            <ul class="blocks-cat-list" data-brand-list="brand">
-                
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-asus" class="cursor-filter-list" name="brand" value="brand=asus">
-                                    <label for="blocks-brand-asus" class="cursor-filter-list none-style-filters text-color-filters">Asus</label>
-                                </li>
-                    
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-acer" class="cursor-filter-list" name="brand" value="brand=acer">
-                                    <label for="blocks-brand-acer" class="cursor-filter-list none-style-filters text-color-filters">Acer</label>
-                                </li>
-                    
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-apple" class="cursor-filter-list" name="brand" value="brand=apple">
-                                    <label for="blocks-brand-apple" class="cursor-filter-list none-style-filters text-color-filters">Apple</label>
-                                </li>
-                    
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-dell" class="cursor-filter-list" name="brand" value="brand=dell">
-                                    <label for="blocks-brand-dell" class="cursor-filter-list none-style-filters text-color-filters">Dell</label>
-                                </li>
-                    
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-dynamode" class="cursor-filter-list" name="brand" value="brand=dynamode">
-                                    <label for="blocks-brand-dynamode" class="cursor-filter-list none-style-filters text-color-filters">Dynamode</label>
-                                </li>
-                    
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-gigabyte" class="cursor-filter-list" name="brand" value="brand=gigabyte">
-                                    <label for="blocks-brand-gigabyte" class="cursor-filter-list none-style-filters text-color-filters">Gigabyte</label>
-                                </li>
-                    
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-kingston" class="cursor-filter-list" name="brand" value="brand=kingston">
-                                    <label for="blocks-brand-kingston" class="cursor-filter-list none-style-filters text-color-filters">Kingston</label>
-                                </li>
-                    
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-lenovo" class="cursor-filter-list" name="brand" value="brand=lenovo">
-                                    <label for="blocks-brand-lenovo" class="cursor-filter-list none-style-filters text-color-filters">Lenovo</label>
-                                </li>
-                        
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-logitech" class="cursor-filter-list" name="brand" value="brand=logitech">
-                                    <label for="blocks-brand-logitech" class="cursor-filter-list none-style-filters text-color-filters">Logitech</label>
-                                </li>
-                        
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-msi" class="cursor-filter-list" name="brand" value="brand=msi">
-                                    <label for="blocks-brand-msi" class="cursor-filter-list none-style-filters text-color-filters">MSI</label>
-                                </li>
-                        
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-benq" class="cursor-filter-list" name="brand" value="brand=benq">
-                                    <label for="blocks-brand-benq" class="cursor-filter-list none-style-filters text-color-filters">BenQ</label>
-                                </li>
-                        
-                                <li class="blocks-cat-br">
-                                    <input type="checkbox" id="blocks-brand-a4tech" class="cursor-filter-list" name="brand" value="brand=a4tech">
-                                    <label for="blocks-brand-a4tech" class="cursor-filter-list none-style-filters text-color-filters">A4Tech</label>
-                                </li>
-                
-                            </ul>
+                            ${this.getBrands()}
                 
                         </form>
             
@@ -151,11 +89,28 @@ export default class FiltersList {
         `
     }
 
-    getCategoriesTemplate(item) {
+    getCategoriesTemplate(item, name) {
         return `
             <li class="blocks-cat-br">
-                <input type="checkbox" id="blocks-category-${item}" class="cursor-filter-list" name="category" value="${item}">
-                <label for="blocks-category-${item}" class="cursor-filter-list none-style-filters text-color-filters">${item}</label>
+                <input type="checkbox" id="blocks-category-${name}" class="cursor-filter-list" name="category" value="${name}">
+                <label for="blocks-category-${name}" class="cursor-filter-list none-style-filters text-color-filters">${item}</label>
+            </li>
+        `
+    }
+
+    getBrands() {
+        return `
+            <ul class="blocks-cat-list" data-brand-list="brand">
+                
+            </ul>
+        `
+    }
+
+    getBrandsTemplate(item, name) {
+        return `
+            <li class="blocks-cat-br">
+                <input type="checkbox" id="blocks-brand-${name}" class="cursor-filter-list" name="brand" value="${name}">
+                <label for="blocks-brand-${name}" class="cursor-filter-list none-style-filters text-color-filters">${item}</label>
             </li>
         `
     }
@@ -169,15 +124,26 @@ export default class FiltersList {
         this.element = wrapper.firstElementChild;
     }
 
-    renderCategories() {
+    renderCategoriesBrands() {
         const categori = this.dataCategories.map(item => {
             const name = item.toLowerCase().split(" ").join("_");
-            return this.getCategoriesTemplate(name);
+            return this.getCategoriesTemplate(item, name);
         }).join("");
 
-        const body = this.element.querySelector('[data-category-list="category"]');
+        const brand = this.dataBrands.map(item => {
+            let name = "";
+            // на backend не корректно написано в массиве бренд A4Tech
+            if(item === "A4Tech") {name = "a4-tech"}
+            else{name = item.toLowerCase().split(" ").join("_");}
+            
+            return this.getBrandsTemplate(item, name);
+        }).join("");
+        
+        const bodyCategori = this.element.querySelector('[data-category-list="category"]');
+        const bodyBrand = this.element.querySelector('[data-brand-list="brand"]');
 
-        body.innerHTML = categori;
+        bodyCategori.innerHTML = categori;
+        bodyBrand.innerHTML = brand;
     }
 
     update(dataCategories = [], dataBrands = []) {
@@ -185,28 +151,40 @@ export default class FiltersList {
         this.dataCategories = dataCategories;
         this.dataBrands = dataBrands;
 
-        this.renderCategories();
+        this.renderCategoriesBrands();
     }
 
     addEventListeners() {
-        const categoryList = this.element.querySelector('[data-category-list="category"]');
-        // const brandList = this.element.querySelector('[data-brand-list="brand"]');
+        const categoriesList = this.element.querySelector('[data-category-list="category"]');
+        const brandsList = this.element.querySelector('[data-brand-list="brand"]');
         
-        categoryList.addEventListener("click", event => {
-            const filtersCategory = event.target.closest('.blocks-cat-br input');
-            
-            if(filtersCategory === null) return;
+        categoriesList.addEventListener("click", event => {
+            const filtersCategories = event.target.closest('.blocks-cat-br input');
+            console.log("event=", event);
+            if(filtersCategories === null) return;
              
-            let stateElement = filtersCategory.checked;
+            let stateElement = filtersCategories.checked;
             let block = "category";
-            let filtersName = filtersCategory.value;
+            let filtersName = filtersCategories.value;
+            
+            this.dispatchEvent(block, filtersName, stateElement);
+        });
+
+        brandsList.addEventListener("click", event => {
+            const filtersBrands = event.target.closest('.blocks-cat-br input');
+            
+            if(filtersBrands === null) return;
+             
+            let stateElement = filtersBrands.checked;
+            let block = "brand";
+            let filtersName = filtersBrands.value;
             
             this.dispatchEvent(block, filtersName, stateElement);
         });
     }
 
     dispatchEvent(block, filtersName, stateElement) {
-        const customEvent = new CustomEvent("category-brand", {detail:{nameBlock:block, filters:filtersName, state:stateElement}});
+        const customEvent = new CustomEvent("categories-brands", {detail:{nameBlock:block, filters:filtersName, state:stateElement}});
 
         this.element.dispatchEvent(customEvent);
     }

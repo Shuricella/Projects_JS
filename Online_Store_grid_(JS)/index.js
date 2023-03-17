@@ -155,7 +155,7 @@ export default class OnlineStorePage {
     }
 
     initEventListenersFilters() {
-        this.components.filtersList.element.addEventListener("category-brand", event => {
+        this.components.filtersList.element.addEventListener("categories-brands", event => {
             let nameBlock = event.detail.nameBlock;
             let filters = event.detail.filters;
             let stateElement = event.detail.state;
@@ -189,7 +189,5 @@ export default class OnlineStorePage {
         const dataBrands = await this.loadDataBrands();
         
         this.components.filtersList.update(dataCategories, dataBrands);
-
-        
     }
 }
