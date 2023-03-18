@@ -35,6 +35,8 @@ export default class OnlineStorePage {
 
         this.initEventListenersFilters();
 
+        this.initEventListenersClear();
+
         this.update(1);
 
         this.updateCategoriesBrand();
@@ -171,6 +173,18 @@ export default class OnlineStorePage {
             this.components.pagination.setPage(0);
             this.update(1);
         })
+    }
+
+    initEventListenersClear() {
+        this.components.filtersList.element.addEventListener("clear-filters", event =>{
+        
+        this.urlProducts.searchParams.delete("category");
+        this.urlProducts.searchParams.delete("brand");
+
+        this.components.pagination.setPage(0);
+        
+        this.update(1);
+        });
     }
 
     async update(pageNumber) {

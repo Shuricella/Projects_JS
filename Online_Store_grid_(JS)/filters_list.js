@@ -9,6 +9,8 @@ export default class FiltersList {
         this.renderCategoriesBrands();
 
         this.addEventListeners();
+
+        this.addEventListenersButtonClear();
     }
 
     getTemplate() {
@@ -185,6 +187,33 @@ export default class FiltersList {
 
     dispatchEvent(block, filtersName, stateElement) {
         const customEvent = new CustomEvent("categories-brands", {detail:{nameBlock:block, filters:filtersName, state:stateElement}});
+
+        this.element.dispatchEvent(customEvent);
+    }
+
+    clearFilters() {
+        const filters = this.element.querySelectorAll("input[type=checkbox]");
+        
+        for(const item of filters) {item.checked = false;};
+    }
+
+    addEventListenersButtonClear() {
+        const buttonSection = this.element.querySelector(".wrapper-butto-clear");
+
+        buttonSection.addEventListener("click", event => {
+            const button = event.target.closest('.wrapper-butto-clear button');
+            
+            if(button === null) return;
+            console.log("button=", button);
+
+            this.clearFilters();
+                        
+            this.dispatchEventClear();
+        });
+    }
+
+    dispatchEventClear() {
+        const customEvent = new CustomEvent("clear-filters");
 
         this.element.dispatchEvent(customEvent);
     }
