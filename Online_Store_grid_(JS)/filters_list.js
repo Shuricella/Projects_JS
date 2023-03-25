@@ -1,10 +1,16 @@
+import DoubleSlider from "./filters_double_slider.js";
+
 export default class FiltersList {
     constructor(dataCategories = [], dataBrands = []) {
         this.dataCategories = dataCategories;
 
         this.dataBrands = dataBrands;
 
+        this.sliders = {};
+
         this.render();
+
+        this.renderDoubleSlider();
 
         this.renderCategoriesBrands();
 
@@ -21,14 +27,9 @@ export default class FiltersList {
 
                     <section class="block-slider">
                         <h2 class="block-slider-text">Prise</h2>
-                
+
                         <section class="wrapper-slider">
-                            <input type="range" class="form-range-slider" min="0" max="85000"  step="1000" id="customRange1">
-                    
-                            <div class="block-slider-price">
-                                <div class="slider-price"><p class="slider-number">0 UA</p></div>
-                                <div class="slider-price"><p class="slider-number">85000 UA</p></div>
-                            </div>
+                            
                         </section>
                     </section>
             
@@ -38,9 +39,7 @@ export default class FiltersList {
                         <h2 class="block-category-brand">Category</h2>
                 
                         <form action="#">
-                
                             ${this.getCategories()}
-                
                         </form>
             
                     </section>
@@ -51,9 +50,7 @@ export default class FiltersList {
                         <h2 class="block-category-brand strip">Brand</h2>
                 
                         <form action="#">
-                
                             ${this.getBrands()}
-                
                         </form>
             
                         <div class="block-line"></div>
@@ -62,16 +59,15 @@ export default class FiltersList {
             
             
                     <div class="block-slider-rating">
+
+
                         <h2 class="block-slider-text">Rating</h2>
                 
                         <section class="wrapper-slider">
-                            <input type="range" class="form-range-slider" min="0" max="5"  step="1" id="customRange1">
-                    
-                            <div class="block-slider-price">
-                                <div class="slider-rating"><p class="slider-number">0</p></div>
-                                <div class="slider-rating"><p class="slider-number">5</p></div>
-                            </div>
+                            
                         </section>
+
+
                     </div>
                 </div>
                                                                 
@@ -103,7 +99,6 @@ export default class FiltersList {
     getBrands() {
         return `
             <ul class="blocks-cat-list" data-brand-list="brand">
-                
             </ul>
         `
     }
@@ -146,6 +141,32 @@ export default class FiltersList {
 
         bodyCategori.innerHTML = categori;
         bodyBrand.innerHTML = brand;
+    }
+
+    renderDoubleSlider() {
+        const price = new DoubleSlider({
+            min: 0,
+            max: 85000,
+            precision: 0,
+            filterName: 'price'
+        });
+
+        this.sliders.price = price;
+
+        const bodyPrice = this.element.querySelector(".block-slider .wrapper-slider");
+        bodyPrice.append(price.element);
+
+        const rating = new DoubleSlider({
+            min: 0,
+            max: 5,
+            precision: 2,
+            filterName: 'rating'
+        });
+
+        this.sliders.rating = rating;
+        
+        const bodyRating = this.element.querySelector(".block-slider-rating .wrapper-slider");
+        bodyRating.append(rating.element);
     }
 
     update(dataCategories = [], dataBrands = []) {
@@ -195,6 +216,9 @@ export default class FiltersList {
         const filters = this.element.querySelectorAll("input[type=checkbox]");
         
         for(const item of filters) {item.checked = false;};
+
+        this.sliders.price.reset();
+        this.sliders.rating.reset();
     }
 
     addEventListenersButtonClear() {

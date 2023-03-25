@@ -173,6 +173,24 @@ export default class OnlineStorePage {
             this.components.pagination.setPage(0);
             this.update(1);
         })
+
+        this.components.filtersList.element.addEventListener("range-selected", event => {
+            let from = event.detail.value.from;
+            let to = event.detail.value.to;
+            let filterName = event.detail.filterName;
+
+            if(filterName === "price") {
+                this.urlProducts.searchParams.set("price_gte", from);
+                this.urlProducts.searchParams.set("price_lte", to);
+            }
+            if(filterName === "rating") {
+                this.urlProducts.searchParams.set("rating_gte", from);
+                this.urlProducts.searchParams.set("rating_lte", to);
+            }
+            
+            this.components.pagination.setPage(0);
+            this.update(1);
+        })
     }
 
     initEventListenersClear() {
@@ -180,6 +198,12 @@ export default class OnlineStorePage {
         
         this.urlProducts.searchParams.delete("category");
         this.urlProducts.searchParams.delete("brand");
+
+        this.urlProducts.searchParams.delete("price_gte");
+        this.urlProducts.searchParams.delete("price_lte");
+
+        this.urlProducts.searchParams.delete("rating_gte");
+        this.urlProducts.searchParams.delete("rating_lte");
 
         this.components.pagination.setPage(0);
         
