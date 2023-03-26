@@ -24,13 +24,9 @@ export default class DoubleSlider {
         newLeft = 100 - right;
       }
 
-      // this.dragging.style.left выдает значение в о.е. по которому определяется значение под ползунком
       this.dragging.style.left = this.subElements.progress.style.left = newLeft + '%';
-      // this.subElements.from.innerHTM выдет значение под ползунком при движении левого ползунка
-      this.subElements.from.innerHTML = this.formatValue(this.getValue().from);
       
-      // console.log("this.dragging.style.left=", this.dragging.style.left);
-      // console.log("this.subElements.from.innerHTML=", this.subElements.from.innerHTML);
+      this.subElements.from.innerHTML = this.formatValue(this.getValue().from);
     }
 
     if (this.dragging === this.subElements.thumbRight) {
@@ -49,13 +45,8 @@ export default class DoubleSlider {
 
       console.error(111);
 
-      // this.dragging.style.left выдает значение в о.е. по которому определяется значение под ползунком
       this.dragging.style.right = this.subElements.progress.style.right = newRight + '%';
-      // this.subElements.from.innerHTM выдет значение под ползунком при движении правого ползунка
       this.subElements.to.innerHTML = this.formatValue(this.getValue().to);
-
-      // console.log("this.dragging.style.right=", this.dragging.style.right);
-      // console.log("this.subElements.to.innerHTML=", this.subElements.to.innerHTML);
     }
   };
 
@@ -78,7 +69,6 @@ export default class DoubleSlider {
   };
 
 
-  // precision = 0 задает колличество знаков после запятой под ползунком слева и справа
   constructor({
                 min = 100,
                 max = 200,
@@ -102,7 +92,7 @@ export default class DoubleSlider {
   
   get template() {
     const { from, to } = this.selected;
-    console.log("this.formatValue(from)=", this.formatValue(from));
+    
     return `<div class="range-slider">
       <span data-element="from">${this.formatValue(from)}</span>
       <div data-element="inner" class="range-slider__inner">

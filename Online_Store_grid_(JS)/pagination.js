@@ -6,6 +6,8 @@ export default class Pagination {
 
         this.render();
 
+        this.renderPages();
+
         this.addEventListeners();
     }
 
@@ -19,7 +21,7 @@ export default class Pagination {
                         </a>
                     </div>
                                         
-                    ${this.getPages()} 
+                    ${this.getTemplatePages()} 
                     
                     <div>
                         <a href="#" class="krug krug-right" data-element="nav-next">
@@ -29,6 +31,14 @@ export default class Pagination {
                 </nav>
             </div>
         `;
+    }
+
+    getTemplatePages() {
+        return `
+        <div data-element="template">
+            <!--Pages-->
+        </div>
+        `
     }
 
     getPages() {
@@ -94,12 +104,22 @@ export default class Pagination {
         this.element = wrapper.firstElementChild;
     }
 
+    renderPages() {
+        const bodyPages = this.element.querySelector('[data-element="template"]');
+        bodyPages.innerHTML = this.getPages();
+    }
     
+    update(totalPages) {
+        // обновим список карточек data
+        this.totalPages = totalPages;
+        
+        this.renderPages();
+    }
 
     addEventListeners() {
        const prevPageBtn = this.element.querySelector('[data-element="nav-prev"]');
        const nextPageBtn = this.element.querySelector('[data-element="nav-next"]');
-       const pagesList = this.element.querySelector('[data-element="pagination"]');
+       const pagesList = this.element.querySelector('[data-element="template"]');
 
        prevPageBtn.addEventListener("click", event => {this.prevPage();});
        nextPageBtn.addEventListener("click", event => {this.nextPage();});

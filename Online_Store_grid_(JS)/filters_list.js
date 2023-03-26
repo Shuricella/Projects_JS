@@ -22,14 +22,12 @@ export default class FiltersList {
     getTemplate() {
         return `
             <section>
-
                 <div class="wrapper-filters-list">
-
                     <section class="block-slider">
                         <h2 class="block-slider-text">Prise</h2>
 
                         <section class="wrapper-slider">
-                            
+                            <!--Slider Price-->
                         </section>
                     </section>
             
@@ -59,15 +57,11 @@ export default class FiltersList {
             
             
                     <div class="block-slider-rating">
-
-
                         <h2 class="block-slider-text">Rating</h2>
                 
                         <section class="wrapper-slider">
-                            
+                            <!--Slider Rating-->
                         </section>
-
-
                     </div>
                 </div>
                                                                 
@@ -82,7 +76,7 @@ export default class FiltersList {
     getCategories() {
         return `
             <ul class="blocks-cat-list" data-category-list="category">
-                
+                <!--CategoriesTemplate-->
             </ul>
         `
     }
@@ -99,6 +93,7 @@ export default class FiltersList {
     getBrands() {
         return `
             <ul class="blocks-cat-list" data-brand-list="brand">
+                <!--BrandsTemplate-->
             </ul>
         `
     }
@@ -124,6 +119,7 @@ export default class FiltersList {
     renderCategoriesBrands() {
         const categori = this.dataCategories.map(item => {
             const name = item.toLowerCase().split(" ").join("_");
+            
             return this.getCategoriesTemplate(item, name);
         }).join("");
 

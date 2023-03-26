@@ -11,7 +11,7 @@ export default class CardsList {
     getTemplate() {
         return `
                 <div class="item-main-cards" data-element="body">
-                <--Cards list-->
+                <!--Cards list-->
                 </div>
         `;
     }

@@ -16,7 +16,8 @@ export default class OnlineStorePage {
         this.categories = [];
         this.brands = [];
         
-        this.totalElements = 100;
+        // this.totalElements = 100;
+        this.totalPages = 12;
                
         // добавляем параметр "products" к адресу "beckendUrl"
         this.urlProducts = new URL("products", backendUrl);
@@ -71,26 +72,26 @@ export default class OnlineStorePage {
         return brands;
     }
 
-                                                                async totalElements() {
-                                                                    let urlTotalPage = new URL(this.urlProducts);
+    async totalElements() {
+        let urlTotalPage = new URL(this.urlProducts);
 
-                                                                    urlTotalPage.searchParams.delete("_limit");
-                                                                    urlTotalPage.searchParams.delete("_page");
-                                                                    
-                                                                    const response = await fetch(urlTotalPage);
-                                                                    const products = await response.json();
-                                                                    
-                                                                    let totalElements = products.length / 2;
-                                                                    
-                                                                    return totalElements;
-                                                                }
+        urlTotalPage.searchParams.delete("_limit");
+        urlTotalPage.searchParams.delete("_page");
+        
+        const response = await fetch(urlTotalPage);
+        const products = await response.json();
+        
+        let totalElements = products.length;
+        
+        return totalElements;
+    }
 
-                                                                async calcTotalPages() {
-                                                                    const totalElements = await this.totalElements();
-                                                                    const totalPages = Math.ceil(totalElements / this.pageSize);
+    async calcTotalPages() {
+        const totalElements = await this.totalElements();
+        const totalPages = Math.ceil(totalElements / this.pageSize);
 
-                                                                    return totalPages;
-                                                                }
+        return totalPages;
+    }
 
     getTemplate() {
         return `
@@ -113,14 +114,14 @@ export default class OnlineStorePage {
     initComponents() {
         // Зададим колличиство элементов в объекте products
        
-        const totalPages = Math.ceil(this.totalElements / this.pageSize);
+        // const totalPages = Math.ceil(this.totalElements / this.pageSize);
      
         // const cardsList = new CardsList(this.products.slice(0, this.pageSize));
         
         const cardsList = new CardsList(this.products);
         const pagination = new Pagination({
             activePageIndex: 0,
-            totalPages: totalPages
+            totalPages: this.totalPages,
         });
         const filtersList = new FiltersList(this.categories, this.brands);
 
@@ -157,6 +158,7 @@ export default class OnlineStorePage {
     }
 
     initEventListenersFilters() {
+        // Фильтрация по categories и brands
         this.components.filtersList.element.addEventListener("categories-brands", event => {
             let nameBlock = event.detail.nameBlock;
             let filters = event.detail.filters;
@@ -183,6 +185,7 @@ export default class OnlineStorePage {
             this.update(1);
         })
 
+         // Фильтрация по слайдеру
         this.components.filtersList.element.addEventListener("range-selected", event => {
             let from = event.detail.value.from;
             let to = event.detail.value.to;
@@ -227,8 +230,12 @@ export default class OnlineStorePage {
         // const end = start + this.pageSize;
         // const data = this.products.slice(start, end);
         const data = await this.loadData(pageNumber);
+
+        let totalPages = await this.calcTotalPages();
+        this.totalPages = totalPages;
                 
         this.components.cardsList.update(data);
+        this.components.pagination.update(totalPages);
     }
 
     async updateCategoriesBrand() {

@@ -7,7 +7,7 @@
 
 .wrapper-filters-list {
   width: 280px;
-  height: 970px;
+  height: 960px;
   margin: 0 auto;
 
   border-radius: 8px;
@@ -19,7 +19,7 @@
     width: 100%;
     height: 95px;
     padding-top: 18px;
-    margin: 0 0 10px 0;
+    margin: 0 0 0px 0;
   }
 
   .block-slider-rating{
