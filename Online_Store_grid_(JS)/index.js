@@ -143,7 +143,7 @@ export default class OnlineStorePage {
         const wrapper = document.createElement("div");
 
         wrapper.innerHTML = this.getTemplate();
-
+        
         // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
     }
@@ -163,12 +163,21 @@ export default class OnlineStorePage {
             let stateElement = event.detail.state;
 
             console.log("nameBlock=", nameBlock, "filters=", filters, "stateElement=", stateElement);
-
+            
             if(stateElement) {
-                this.urlProducts.searchParams.set(nameBlock, filters);
+                
+                this.urlProducts.searchParams.append(nameBlock, filters);
             }
             else{
+                let listName = this.urlProducts.searchParams.getAll(nameBlock);
+                
                 this.urlProducts.searchParams.delete(nameBlock);
+
+                listName.map(item =>{
+                    if(item != filters) {
+                        this.urlProducts.searchParams.append(nameBlock, item);
+                    }
+                })
             }
             this.components.pagination.setPage(0);
             this.update(1);

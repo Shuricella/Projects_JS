@@ -183,7 +183,7 @@ export default class FiltersList {
         
         categoriesList.addEventListener("click", event => {
             const filtersCategories = event.target.closest('.blocks-cat-br input');
-            console.log("event=", event);
+            
             if(filtersCategories === null) return;
              
             let stateElement = filtersCategories.checked;
