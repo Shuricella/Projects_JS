@@ -6,7 +6,7 @@ export default class FiltersList {
 
         this.dataBrands = dataBrands;
 
-        this.sliders = {};
+        this.filtersComponents = {};
 
         this.render();
 
@@ -147,7 +147,7 @@ export default class FiltersList {
             filterName: 'price'
         });
 
-        this.sliders.price = price;
+        this.filtersComponents.price = price;
 
         const bodyPrice = this.element.querySelector(".block-slider .wrapper-slider");
         bodyPrice.append(price.element);
@@ -159,7 +159,7 @@ export default class FiltersList {
             filterName: 'rating'
         });
 
-        this.sliders.rating = rating;
+        this.filtersComponents.rating = rating;
         
         const bodyRating = this.element.querySelector(".block-slider-rating .wrapper-slider");
         bodyRating.append(rating.element);
@@ -213,8 +213,8 @@ export default class FiltersList {
         
         for(const item of filters) {item.checked = false;};
 
-        this.sliders.price.reset();
-        this.sliders.rating.reset();
+        this.filtersComponents.price.reset();
+        this.filtersComponents.rating.reset();
     }
 
     addEventListenersButtonClear() {

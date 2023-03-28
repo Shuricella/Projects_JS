@@ -2,6 +2,7 @@
 import CardsList from "./cards-list.js";
 import Pagination from "./pagination.js";
 import FiltersList from "./filters_list.js";
+import Search from "./search.js";
 
 // products?_page=1&_limit=9
 const backendUrl = `https://online-store.bootcamp.place/api/`;
@@ -100,6 +101,10 @@ export default class OnlineStorePage {
                 <!-- FiltersList -->
             </aside>
 
+            <section class="item-search">
+                <!-- Item-Search -->
+            </section>
+
             <div class="item-main" data-element="cardsList">
                 <!-- Card List component -->
             </div>
@@ -124,20 +129,24 @@ export default class OnlineStorePage {
             totalPages: this.totalPages,
         });
         const filtersList = new FiltersList(this.categories, this.brands);
-
+        const search = new Search();
+        
         this.components.cardsList = cardsList;
         this.components.pagination = pagination;
         this.components.filtersList = filtersList;
+        this.components.search = search;
     }
 
     renderComponents() {
         const cardsConteiner = this.element.querySelector('[data-element="cardsList"]');
         const paginationConteiner = this.element.querySelector('[data-element="pagination"]');
         const filtersListConteiner = this.element.querySelector('[data-element="filtersList"]');
-        
+        const searchConteiner = this.element.querySelector('.item-search');
+            
         cardsConteiner.append(this.components.cardsList.element);
         paginationConteiner.append(this.components.pagination.element);
         filtersListConteiner.append(this.components.filtersList.element);
+        searchConteiner.append(this.components.search.element);
     }
 
     render() {
@@ -203,6 +212,16 @@ export default class OnlineStorePage {
             this.components.pagination.setPage(0);
             this.update(1);
         })
+
+        // Фильтрация по поисковой строке
+        this.components.search.element.addEventListener("search", event =>{
+            let searchText = event.detail;
+            console.log("searchText=", searchText);
+
+            this.urlProducts.searchParams.set("q", searchText);
+
+            this.update(1);
+        })
     }
 
     initEventListenersClear() {
@@ -216,6 +235,8 @@ export default class OnlineStorePage {
 
         this.urlProducts.searchParams.delete("rating_gte");
         this.urlProducts.searchParams.delete("rating_lte");
+
+        this.urlProducts.searchParams.delete("q");
 
         this.components.pagination.setPage(0);
         
