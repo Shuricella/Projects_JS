@@ -217,9 +217,10 @@ export default class OnlineStorePage {
         this.components.search.element.addEventListener("search", event =>{
             let searchText = event.detail;
             console.log("searchText=", searchText);
-
-            this.urlProducts.searchParams.set("q", searchText);
-
+            if(searchText != undefined) {
+                this.urlProducts.searchParams.set("q", searchText);
+            }
+            
             this.update(1);
         })
     }
@@ -237,6 +238,7 @@ export default class OnlineStorePage {
         this.urlProducts.searchParams.delete("rating_lte");
 
         this.urlProducts.searchParams.delete("q");
+        this.components.search.clearSearch();
 
         this.components.pagination.setPage(0);
         

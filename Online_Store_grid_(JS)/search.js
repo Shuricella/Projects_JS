@@ -30,6 +30,12 @@ export default class Search {
         this.element = wrapper;
     }
 
+    clearSearch() {
+        const textField = this.element.querySelector('.search-text input');
+        
+        textField.value = "";
+    }
+
     addEventListeners() {
         let search = this.element.querySelector('.wrapper-search-component');
         // change

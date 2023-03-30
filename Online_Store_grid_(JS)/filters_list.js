@@ -1,5 +1,4 @@
 import DoubleSlider from "./filters_double_slider.js";
-
 export default class FiltersList {
     constructor(dataCategories = [], dataBrands = []) {
         this.dataCategories = dataCategories;
@@ -10,7 +9,7 @@ export default class FiltersList {
 
         this.render();
 
-        this.renderDoubleSlider();
+        this.renderFiltersComponents();
 
         this.renderCategoriesBrands();
 
@@ -139,7 +138,27 @@ export default class FiltersList {
         bodyBrand.innerHTML = brand;
     }
 
-    renderDoubleSlider() {
+    initFiltersComponents() {
+        const price = new DoubleSlider({
+            min: 0,
+            max: 85000,
+            precision: 0,
+            filterName: 'price'
+        });
+
+        this.filtersComponents.price = price;
+
+        const rating = new DoubleSlider({
+            min: 0,
+            max: 5,
+            precision: 2,
+            filterName: 'rating'
+        });
+
+        this.filtersComponents.rating = rating;
+    }
+
+    renderFiltersComponents() {
         const price = new DoubleSlider({
             min: 0,
             max: 85000,
