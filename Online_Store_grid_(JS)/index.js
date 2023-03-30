@@ -1,4 +1,5 @@
 // В этой компоненте будет вся логика от всей страницы и другие компоненты
+import Header from "./header.js";
 import CardsList from "./cards-list.js";
 import Pagination from "./pagination.js";
 import FiltersList from "./filters_list.js";
@@ -97,6 +98,10 @@ export default class OnlineStorePage {
     getTemplate() {
         return `
         <div class="wrapper-grid">
+            <header class="item-header">
+                <!--Header component-->
+            </header>
+
             <aside class="item-products" data-element="filtersList">
                 <!-- FiltersList -->
             </aside>
@@ -123,6 +128,7 @@ export default class OnlineStorePage {
      
         // const cardsList = new CardsList(this.products.slice(0, this.pageSize));
         
+        const header = new Header();
         const cardsList = new CardsList(this.products);
         const pagination = new Pagination({
             activePageIndex: 0,
@@ -130,7 +136,7 @@ export default class OnlineStorePage {
         });
         const filtersList = new FiltersList(this.categories, this.brands);
         const search = new Search();
-        
+        this.components.header = header;
         this.components.cardsList = cardsList;
         this.components.pagination = pagination;
         this.components.filtersList = filtersList;
@@ -138,11 +144,13 @@ export default class OnlineStorePage {
     }
 
     renderComponents() {
+        const header = this.element.querySelector('.item-header');
         const cardsConteiner = this.element.querySelector('[data-element="cardsList"]');
         const paginationConteiner = this.element.querySelector('[data-element="pagination"]');
         const filtersListConteiner = this.element.querySelector('[data-element="filtersList"]');
         const searchConteiner = this.element.querySelector('.item-search');
-            
+        
+        header.append(this.components.header.element);
         cardsConteiner.append(this.components.cardsList.element);
         paginationConteiner.append(this.components.pagination.element);
         filtersListConteiner.append(this.components.filtersList.element);
