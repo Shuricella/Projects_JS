@@ -4,6 +4,7 @@ import CardsList from "./cards-list.js";
 import Pagination from "./pagination.js";
 import FiltersList from "./filters_list.js";
 import Search from "./search.js";
+import CartsList from "./carts_list.js";
 
 // products?_page=1&_limit=9
 const backendUrl = `https://online-store.bootcamp.place/api/`;
@@ -39,6 +40,8 @@ export default class OnlineStorePage {
         this.initEventListenersFilters();
 
         this.initEventListenersClear();
+
+        this.initEventListenersCartsList();
 
         this.update(1);
 
@@ -97,27 +100,31 @@ export default class OnlineStorePage {
 
     getTemplate() {
         return `
-        <div class="wrapper-grid">
-            <header class="item-header">
-                <!--Header component-->
-            </header>
+            <div class="wrapper-grid">
+                <dialog class="modal">
+                    <!--Carts list-->
+                </dialog>
+                
+                <header class="item-header">
+                    <!--Header component-->
+                </header>
 
-            <aside class="item-products" data-element="filtersList">
-                <!-- FiltersList -->
-            </aside>
+                <aside class="item-products" data-element="filtersList">
+                    <!-- FiltersList -->
+                </aside>
 
-            <section class="item-search">
-                <!-- Item-Search -->
-            </section>
+                <section class="item-search">
+                    <!-- Item-Search -->
+                </section>
 
-            <div class="item-main" data-element="cardsList">
-                <!-- Card List component -->
+                <div class="item-main" data-element="cardsList">
+                    <!-- Card List component -->
+                </div>
+
+                <div class="item-pagination" data-element="pagination">
+                    <!--Pagination component-->
+                </div>
             </div>
-
-            <div class="item-pagination" data-element="pagination">
-                <!--Pagination component-->
-            </div>
-        </div>
         `;
     }
 
@@ -136,11 +143,14 @@ export default class OnlineStorePage {
         });
         const filtersList = new FiltersList(this.categories, this.brands);
         const search = new Search();
+        const cartsList = new CartsList();
+        
         this.components.header = header;
         this.components.cardsList = cardsList;
         this.components.pagination = pagination;
         this.components.filtersList = filtersList;
         this.components.search = search;
+        this.components.cartsList = cartsList;
     }
 
     renderComponents() {
@@ -149,12 +159,14 @@ export default class OnlineStorePage {
         const paginationConteiner = this.element.querySelector('[data-element="pagination"]');
         const filtersListConteiner = this.element.querySelector('[data-element="filtersList"]');
         const searchConteiner = this.element.querySelector('.item-search');
-        
+        const cartsConteiner = this.element.querySelector('.modal');
+            
         header.append(this.components.header.element);
         cardsConteiner.append(this.components.cardsList.element);
         paginationConteiner.append(this.components.pagination.element);
         filtersListConteiner.append(this.components.filtersList.element);
         searchConteiner.append(this.components.search.element);
+        cartsConteiner.append(this.components.cartsList.element);
     }
 
     render() {
@@ -252,6 +264,18 @@ export default class OnlineStorePage {
         
         this.update(1);
         });
+    }
+
+    initEventListenersCartsList() {
+        const dialog = this.element.querySelector("dialog");
+        
+        this.components.header.element.addEventListener("cartslistevent", event => {
+            dialog.showModal();
+        })
+
+        this.components.cartsList.element.addEventListener("closecartslistevent", event => {
+            dialog.close();
+        })
     }
 
     async update(pageNumber) {

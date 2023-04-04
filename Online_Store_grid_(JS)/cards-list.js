@@ -43,7 +43,7 @@ export default class CardsList {
     update(data = []) {
         // обновим список карточек data
         this.data = data;
-
+        console.log(data);
         this.renderCards();
     }
 }

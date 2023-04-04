@@ -1,6 +1,8 @@
 export default class Header {
     constructor() {
         this.render();
+
+        this.addEventListenersCart();
     }
 
     getTemplate() {
@@ -25,5 +27,19 @@ export default class Header {
 
         // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
+    }
+
+    addEventListenersCart() {
+        const orderButton = this.element.querySelector(".header-cart");
+        
+        orderButton.addEventListener("click", event => {
+            this.dispatchEvent();
+        })
+    }
+
+    dispatchEvent() {
+        const cartsListEvent = new CustomEvent("cartslistevent");
+
+        this.element.dispatchEvent(cartsListEvent);
     }
 }
