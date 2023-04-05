@@ -3,6 +3,8 @@ export default class Card {
         this.state = someProduct;
 
         this.myRender();
+
+        this.addEventListeners();
     }
 
     getTemplate() {
@@ -58,5 +60,20 @@ export default class Card {
 
         // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
+    }
+
+    addEventListeners() {
+        const button = this.element.querySelector('.block-button-add');
+        
+        button.addEventListener("click", event => {
+            this.dispatchEvent(this.state);
+        })
+    }
+
+    dispatchEvent(data = {}) {
+        const cardEvent = new CustomEvent("cardeventadd");
+        console.log(data);
+        // {detail:data}
+        this.element.dispatchEvent(cardEvent);
     }
 }

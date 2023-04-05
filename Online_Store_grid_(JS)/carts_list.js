@@ -1,8 +1,11 @@
 export default class CartsList {
     constructor() {
+        this.carts = [];
+
         this.render();
 
         this.addEventListenersClose();
+
     }
 
     getTemplate() {
