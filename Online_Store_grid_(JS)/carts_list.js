@@ -1,3 +1,5 @@
+import Cart from "./cart.js";
+
 export default class CartsList {
     constructor() {
         this.carts = [];
@@ -23,229 +25,9 @@ export default class CartsList {
                 
                 <main>
                     <ul class="carts-list">
-            
-                    <li class="cart">
-            
-                        <div class="cart-img">
-                        <img src="https://content1.rozetka.com.ua/goods/images/big_tile/25101161.jpg" alt="laptop" height="40">
-                        </div>
-                        
-                        <div class="block-cart-title">
-                        <h1 class="cart-title text-cart-list">Монитор 23.8\" Asus TUF Gaming VG249Q1A (90LM06J1-B01170) + Asus TUF M3 USB (90MP01J0-B0UA00) у подарунок!</h1>
-                        </div>
-                        
-                        <section class="cart-block">
-                        <div class="amount-product">
-                            <button type="button">
-                            <i class="bi bi-plus-circle"></i>
-                            </button>
-                    
-                            <p class="text-cart-list">1</p>
-                    
-                            <button type="button">
-                            <i class="bi bi-dash-circle"></i>
-                            </button>
-                        </div>
-                        
-                        <div class="price-title">
-                            <p class="text-cart-list">28999</p>
-                        </div>
-                        
-                        <div class="delete-title">
-                            <button type="button">
-                            <i class="bi bi-trash-fill"></i>
-                            </button>
-                        </div>
-                        </section>
-                        
-                    </li>
-            
-                    <li class="cart">
-            
-                        <div class="cart-img">
-                        <img src="https://content1.rozetka.com.ua/goods/images/big_tile/6151372.jpg" alt="laptop" height="40">
-                        </div>
-                        
-                        <div class="block-cart-title">
-                        <h1 class="cart-title text-cart-list">Монитор 23.8\" Asus TUF Gaming VG249Q1A (90LM06J1-B01170) + Asus TUF M3 USB (90MP01J0-B0UA00) у подарунок!</h1>
-                        </div>
-                        
-                        <section class="cart-block">
-                        <div class="amount-product">
-                            <button type="button">
-                            <i class="bi bi-plus-circle"></i>
-                            </button>
-                    
-                            <p class="text-cart-list">1</p>
-                    
-                            <button type="button">
-                            <i class="bi bi-dash-circle"></i>
-                            </button>
-                        </div>
-                        
-                        <div class="price-title">
-                            <p class="text-cart-list">28999</p>
-                        </div>
-                        
-                        <div class="delete-title">
-                            <button type="button">
-                            <i class="bi bi-trash-fill"></i>
-                            </button>
-                        </div>
-                        </section>
-                        
-            
-                    </li>
-            
-                    <li class="cart">
-            
-                        <div class="cart-img">
-                        <img src="https://content2.rozetka.com.ua/goods/images/big/21329737.jpg" alt="laptop" height="40">
-                        </div>
-                        
-                        <div class="block-cart-title">
-                        <h1 class="cart-title text-cart-list">Звуковая карта Asus Xonar SE (90YA00T0-M0UA00)</h1>
-                        </div>
-                        
-                        <section class="cart-block">
-                        <div class="amount-product">
-                            <button type="button">
-                            <i class="bi bi-plus-circle"></i>
-                            </button>
-                    
-                            <p class="text-cart-list">1</p>
-                    
-                            <button type="button">
-                            <i class="bi bi-dash-circle"></i>
-                            </button>
-                        </div>
-                        
-                        <div class="price-title">
-                            <p class="text-cart-list">1600</p>
-                        </div>
-                        
-                        <div class="delete-title">
-                            <button type="button">
-                            <i class="bi bi-trash-fill"></i>
-                            </button>
-                        </div>
-                        </section>
-                        
-            
-                    </li>
 
-                    <li class="cart">
-  
-                        <div class="cart-img">
-                        <img src="https://content2.rozetka.com.ua/goods/images/big/21329737.jpg" alt="laptop" height="40">
-                        </div>
-                        
-                        <div class="block-cart-title">
-                        <h1 class="cart-title text-cart-list">Звуковая карта Asus Xonar SE (90YA00T0-M0UA00)</h1>
-                        </div>
-                        
-                        <section class="cart-block">
-                        <div class="amount-product">
-                            <button type="button">
-                            <i class="bi bi-plus-circle"></i>
-                            </button>
-                    
-                            <p class="text-cart-list">1</p>
-                    
-                            <button type="button">
-                            <i class="bi bi-dash-circle"></i>
-                            </button>
-                        </div>
-                        
-                        <div class="price-title">
-                            <p class="text-cart-list">1600</p>
-                        </div>
-                        
-                        <div class="delete-title">
-                            <button type="button">
-                            <i class="bi bi-trash-fill"></i>
-                            </button>
-                        </div>
-                        </section>
-                        
-            
-                    </li>
-
-                    <li class="cart">
-  
-                        <div class="cart-img">
-                        <img src="https://content2.rozetka.com.ua/goods/images/big/21329737.jpg" alt="laptop" height="40">
-                        </div>
-                        
-                        <div class="block-cart-title">
-                        <h1 class="cart-title text-cart-list">Звуковая карта Asus Xonar SE (90YA00T0-M0UA00)</h1>
-                        </div>
-                        
-                        <section class="cart-block">
-                        <div class="amount-product">
-                            <button type="button">
-                            <i class="bi bi-plus-circle"></i>
-                            </button>
-                    
-                            <p class="text-cart-list">1</p>
-                    
-                            <button type="button">
-                            <i class="bi bi-dash-circle"></i>
-                            </button>
-                        </div>
-                        
-                        <div class="price-title">
-                            <p class="text-cart-list">1600</p>
-                        </div>
-                        
-                        <div class="delete-title">
-                            <button type="button">
-                            <i class="bi bi-trash-fill"></i>
-                            </button>
-                        </div>
-                        </section>
-                        
-            
-                    </li>
-
-                    <li class="cart">
-  
-                        <div class="cart-img">
-                        <img src="https://content2.rozetka.com.ua/goods/images/big/21329737.jpg" alt="laptop" height="40">
-                        </div>
-                        
-                        <div class="block-cart-title">
-                        <h1 class="cart-title text-cart-list">Звуковая карта Asus Xonar SE (90YA00T0-M0UA00)</h1>
-                        </div>
-                        
-                        <section class="cart-block">
-                        <div class="amount-product">
-                            <button type="button">
-                            <i class="bi bi-plus-circle"></i>
-                            </button>
-                    
-                            <p class="text-cart-list">1</p>
-                    
-                            <button type="button">
-                            <i class="bi bi-dash-circle"></i>
-                            </button>
-                        </div>
-                        
-                        <div class="price-title">
-                            <p class="text-cart-list">1600</p>
-                        </div>
-                        
-                        <div class="delete-title">
-                            <button type="button">
-                            <i class="bi bi-trash-fill"></i>
-                            </button>
-                        </div>
-                        </section>
-                        
-            
-                    </li>
-                    
-                    
+                        <!--Carts-->
+                                    
                     </ul>
                 </main>
                 
@@ -267,6 +49,52 @@ export default class CartsList {
         `;
     }
 
+    // getTemplateCart(dataCarts = {}) {
+    //     return `
+    //         <li class="cart">
+                    
+    //             <div class="cart-img">
+    //             <img src="https://content1.rozetka.com.ua/goods/images/big_tile/25101161.jpg" alt="laptop" height="40">
+    //             </div>
+                
+    //             <div class="block-cart-title">
+    //             <h1 class="cart-title text-cart-list">Монитор 23.8\" Asus TUF Gaming VG249Q1A (90LM06J1-B01170) + Asus TUF M3 USB (90MP01J0-B0UA00) у подарунок!</h1>
+    //             </div>
+                
+    //             <section class="cart-block">
+    //             <div class="amount-product">
+    //                 <button type="button">
+    //                 <i class="bi bi-plus-circle"></i>
+    //                 </button>
+            
+    //                 <p class="text-cart-list">1</p>
+            
+    //                 <button type="button">
+    //                 <i class="bi bi-dash-circle"></i>
+    //                 </button>
+    //             </div>
+                
+    //             <div class="price-title">
+    //                 <p class="text-cart-list">28999</p>
+    //             </div>
+                
+    //             <div class="delete-title">
+    //                 <button type="button">
+    //                 <i class="bi bi-trash-fill"></i>
+    //                 </button>
+    //             </div>
+    //             </section>
+                
+    //         </li>
+    //     `
+    // }
+
+    initCart(dataCarts = {}) {
+        const cart = new Cart(dataCarts);
+
+        return cart.element;
+    }
+
     render() {
         const wrapper = document.createElement("div");
         
@@ -274,6 +102,26 @@ export default class CartsList {
 
         // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
+    }
+
+    renderCarts(dataCarts = {}) {
+        const conteinerCarts = this.element.querySelector('.carts-list');
+        
+        const template = this.initCart(dataCarts);
+            console.log("template=", template);
+        conteinerCarts.append(template);
+    }
+
+    update(dataCarts){
+        const searchId = dataCarts.id;
+        const resaltSearch = this.carts.find(item => item.id === searchId);
+
+        if (!resaltSearch) {
+            this.carts.push(dataCarts);
+
+            this.renderCarts(dataCarts);
+        }
+                
     }
 
     addEventListenersClose() {

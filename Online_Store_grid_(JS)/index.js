@@ -276,6 +276,14 @@ export default class OnlineStorePage {
         this.components.cartsList.element.addEventListener("closecartslistevent", event => {
             dialog.close();
         })
+
+        this.components.cardsList.element.addEventListener("cardeventadd", event => {
+            const dataCarts = event.detail;
+
+            
+
+            this.components.cartsList.update(dataCarts);
+        })
     }
 
     async update(pageNumber) {
