@@ -7,6 +7,7 @@ export default class CartsList {
         this.render();
 
         this.addEventListenersClose();
+        this.initEventListenersCartsList();
     }
 
     getTemplate() {
@@ -45,8 +46,8 @@ export default class CartsList {
         `;
     }    
 
-    initCart(dataCarts = {}) {
-        const cart = new Cart(dataCarts);
+    initCart(item = {}) {
+        const cart = new Cart(item);
 
         return cart.element;
     }
@@ -60,12 +61,15 @@ export default class CartsList {
         this.element = wrapper.firstElementChild;
     }
 
-    renderCarts(dataCarts = {}) {
+    renderCarts() {
         const conteinerCarts = this.element.querySelector('.carts-list');
         
-        const template = this.initCart(dataCarts);
-            // console.log("template=", template);
-        conteinerCarts.append(template);
+        const template = this.carts.map((item) =>{
+            return this.initCart(item)
+        });
+
+        conteinerCarts.innerHTML = "";
+        conteinerCarts.append(...template);
     }
 
     update(dataCarts){
@@ -75,11 +79,20 @@ export default class CartsList {
         if (!resaltSearch) {
             this.carts.push(dataCarts);
 
-            this.renderCarts(dataCarts);
+            this.renderCarts();    
         }
-        console.log("this.carts=", this.carts);
+         console.log("this.carts=", this.carts);
     }
 
+    deleteCart(cartId) {
+        const indexCart = this.carts.findIndex(item => item.id === cartId);
+
+        const newDataCarts = this.carts.filter((item, index) => {if(index != indexCart) {return item} });
+
+        this.carts = newDataCarts;
+
+        this.renderCarts();
+    }
 
     addEventListenersClose() {
         const closeButton = this.element.querySelector('[data-element="close-carts-list"]');
@@ -87,6 +100,14 @@ export default class CartsList {
         closeButton.addEventListener("click", event => {
             
             this.dispatchEvent();
+        })
+    }
+
+    initEventListenersCartsList() {
+        this.element.addEventListener("cartieventdelete", event => {
+            const cartId = event.detail;
+            
+            this.deleteCart(cartId);
         })
     }
 

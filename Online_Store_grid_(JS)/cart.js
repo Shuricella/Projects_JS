@@ -2,10 +2,10 @@ export default class Cart {
     constructor(data = {}) {
         this.state = data;
 
-        this.amount = 0;
+        this.amount = 1;
 
         this.render();
-        this.renderCart();
+        this.renderAmount();
 
         this.addEventListeners();
     }
@@ -74,7 +74,7 @@ export default class Cart {
         this.element = wrapper.firstElementChild;
     }
 
-    renderCart() {
+    renderAmount() {
         const amountBlock = this.element.querySelector('.amount-product .text-cart-list');
         
         amountBlock.innerHTML = this.getTemplateAmount();
@@ -83,6 +83,8 @@ export default class Cart {
     addEventListeners() {
         const nextButton = this.element.querySelector('[data-element="nextbutton"]');
         const prevButton = this.element.querySelector('[data-element="prevbutton"]');
+
+        const deleteButton = this.element.querySelector('.delete-title');
             
         nextButton.addEventListener("click", event => {
             const item = event.target.closest('.bi-plus-circle');
@@ -91,16 +93,32 @@ export default class Cart {
 
             this.amount += 1;
 
-            this.renderCart();
+            this.renderAmount();
         })
 
         prevButton.addEventListener("click", event => {
             const item = event.target.closest('.bi-dash-circle');
-            if(item === null || this.amount === 0) return;
+            if(item === null || this.amount === 1) return;
 
             this.amount -= 1;
 
-            this.renderCart();
+            this.renderAmount();
+        })
+
+        deleteButton.addEventListener("click", event => {
+            const item = event.target.closest('.bi-trash-fill');
+            if(item === null) return;
+
+            console.log("item=", item);
+
+            this.dispatchEvent(this.state.id);
         })
     }
+
+    dispatchEvent(cartId) {
+        const deleteButton = new CustomEvent("cartieventdelete", {bubbles:true, detail: cartId});
+        // console.log("idcart=", cartId); bubbles:true,
+        this.element.dispatchEvent(deleteButton);
+    }
+    
 }
