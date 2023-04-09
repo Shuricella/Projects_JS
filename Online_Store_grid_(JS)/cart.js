@@ -1,8 +1,8 @@
 export default class Cart {
-    constructor(data = {}) {
+    constructor(data = {}, amount = 1) {
         this.state = data;
 
-        this.amount = 1;
+        this.amount = amount;
 
         this.render();
         this.renderAmount();
@@ -94,6 +94,7 @@ export default class Cart {
             this.amount += 1;
 
             this.renderAmount();
+            this.dispatchEventAmount(this.state.id, this.amount);
         })
 
         prevButton.addEventListener("click", event => {
@@ -103,6 +104,7 @@ export default class Cart {
             this.amount -= 1;
 
             this.renderAmount();
+            this.dispatchEventAmount(this.state.id, this.amount);
         })
 
         deleteButton.addEventListener("click", event => {
@@ -111,14 +113,20 @@ export default class Cart {
 
             console.log("item=", item);
 
-            this.dispatchEvent(this.state.id);
+            this.dispatchEventDelete(this.state.id);
         })
     }
 
-    dispatchEvent(cartId) {
+    dispatchEventDelete(cartId) {
         const deleteButton = new CustomEvent("cartieventdelete", {bubbles:true, detail: cartId});
         // console.log("idcart=", cartId); bubbles:true,
         this.element.dispatchEvent(deleteButton);
+    }
+
+    dispatchEventAmount(cartId, amount) {
+        const updateAmout = new CustomEvent("updateamount", {bubbles:true, detail:{"cartId":cartId, "amount":amount}});
+        // console.log("idcart=", cartId); bubbles:true,
+        this.element.dispatchEvent(updateAmout);
     }
     
 }

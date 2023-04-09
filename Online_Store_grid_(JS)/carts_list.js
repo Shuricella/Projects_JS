@@ -3,6 +3,7 @@ import Cart from "./cart.js";
 export default class CartsList {
     constructor() {
         this.carts = [];
+        this.cartsId = {};
 
         this.render();
 
@@ -46,8 +47,8 @@ export default class CartsList {
         `;
     }    
 
-    initCart(item = {}) {
-        const cart = new Cart(item);
+    initCart(item = {}, amount = 1) {
+        const cart = new Cart(item, amount);
 
         return cart.element;
     }
@@ -65,7 +66,9 @@ export default class CartsList {
         const conteinerCarts = this.element.querySelector('.carts-list');
         
         const template = this.carts.map((item) =>{
-            return this.initCart(item)
+            const amount = this.cartsId[item.id];
+                // console.log("amount=", amount);
+            return this.initCart(item, amount);
         });
 
         conteinerCarts.innerHTML = "";
@@ -76,12 +79,16 @@ export default class CartsList {
         const searchId = dataCarts.id;
         const resaltSearch = this.carts.find(item => item.id === searchId);
 
-        if (!resaltSearch) {
-            this.carts.push(dataCarts);
-
-            this.renderCarts();    
+        if(resaltSearch) {
+            this.cartsId[searchId] += 1;
         }
+        else{
+            this.carts.push(dataCarts);
+            this.cartsId[searchId] = 1;
+        }
+        this.renderCarts();
          console.log("this.carts=", this.carts);
+         console.log("this.cartsId=", this.cartsId);
     }
 
     deleteCart(cartId) {
@@ -90,6 +97,9 @@ export default class CartsList {
         const newDataCarts = this.carts.filter((item, index) => {if(index != indexCart) {return item} });
 
         this.carts = newDataCarts;
+
+        delete this.cartsId[cartId];
+        console.log("this.cartsId_delete=", this.cartsId);
 
         this.renderCarts();
     }
@@ -109,8 +119,23 @@ export default class CartsList {
             
             this.deleteCart(cartId);
         })
-    }
 
+        this.element.addEventListener("updateamount", event => {
+            const cartId = event.detail.cartId;
+            const amount = event.detail.amount;
+            // console.log("cartId=", cartId, "amount=", amount);
+            this.cartsId[cartId] = amount;
+            console.log("this.cartsID=", this.cartsId);
+            // this.deleteCart(cartId);
+        })
+
+        // this.element.addEventListener("updateamount", event => {
+        //     const cartId = event.detail.;
+        //     console.log(11);
+        //     // this.deleteCart(cartId);
+        // })
+    }
+   
     dispatchEvent() {
         const closeCartsListEvent = new CustomEvent("closecartslistevent");
         
