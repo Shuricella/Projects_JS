@@ -6,6 +6,7 @@ export default class Cart {
 
         this.render();
         this.renderAmount();
+        this.renderPrice();
 
         this.addEventListeners();
     }
@@ -40,7 +41,9 @@ export default class Cart {
                 </div>
                 
                 <div class="price-title">
-                    <p class="text-cart-list">${this.state.price}</p>
+
+                    <!--Price-->
+
                 </div>
                 
                 <div class="delete-title">
@@ -65,6 +68,14 @@ export default class Cart {
         `;
     }
 
+    getTemplatePrice() {
+        return `
+            <p class="text-cart-list">
+                ${this.state.price * this.amount}
+            </p>
+        `;
+    }
+
     render() {
         const wrapper = document.createElement("div");
         
@@ -80,10 +91,15 @@ export default class Cart {
         amountBlock.innerHTML = this.getTemplateAmount();
     }
 
+    renderPrice() {
+        const priceBlock = this.element.querySelector('.price-title');
+        
+        priceBlock.innerHTML = this.getTemplatePrice();
+    }
+
     addEventListeners() {
         const nextButton = this.element.querySelector('[data-element="nextbutton"]');
         const prevButton = this.element.querySelector('[data-element="prevbutton"]');
-
         const deleteButton = this.element.querySelector('.delete-title');
             
         nextButton.addEventListener("click", event => {
@@ -94,6 +110,8 @@ export default class Cart {
             this.amount += 1;
 
             this.renderAmount();
+            this.renderPrice();
+
             this.dispatchEventAmount(this.state.id, this.amount);
         })
 
@@ -104,6 +122,8 @@ export default class Cart {
             this.amount -= 1;
 
             this.renderAmount();
+            this.renderPrice();
+
             this.dispatchEventAmount(this.state.id, this.amount);
         })
 

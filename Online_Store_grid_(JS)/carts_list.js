@@ -5,7 +5,12 @@ export default class CartsList {
         this.carts = [];
         this.cartsId = {};
 
+        this.totalPrice = 0;
+        this.totalProducts = 0;
+
         this.render();
+            this.renderPrice();
+        this.updateTotalPrice();
 
         this.addEventListenersClose();
         this.initEventListenersCartsList();
@@ -35,7 +40,9 @@ export default class CartsList {
                 <footer>
                     <div class="cart-total">
                         <h2 class="text-cart-list">Total:</h2>
-                        <p class="text-cart-list" data-element="total">28999</p>
+                        <p class="text-cart-list" data-element="total">
+                            <!--Price-->
+                        </p>
                     </div>
                 
                     <div class="order-button">
@@ -45,7 +52,15 @@ export default class CartsList {
         
             </section>
         `;
-    }    
+    }
+    
+    getTemplatePrice() {
+        return `
+            <div>
+                ${this.totalPrice}
+            </div>
+        `;
+    }
 
     initCart(item = {}, amount = 1) {
         const cart = new Cart(item, amount);
@@ -67,12 +82,18 @@ export default class CartsList {
         
         const template = this.carts.map((item) =>{
             const amount = this.cartsId[item.id];
-                // console.log("amount=", amount);
+                
             return this.initCart(item, amount);
         });
 
         conteinerCarts.innerHTML = "";
         conteinerCarts.append(...template);
+    }
+
+    renderPrice() {
+        const priceBlock = this.element.querySelector('[data-element="total"]');
+        console.log("priceBlock=", priceBlock);
+        priceBlock.innerHTML = this.getTemplatePrice();
     }
 
     update(dataCarts){
@@ -87,8 +108,11 @@ export default class CartsList {
             this.cartsId[searchId] = 1;
         }
         this.renderCarts();
-         console.log("this.carts=", this.carts);
-         console.log("this.cartsId=", this.cartsId);
+         console.log("this.carts1=", this.carts);
+         console.log("this.cartsId1=", this.cartsId);
+
+         this.updateTotalPrice();
+         
     }
 
     deleteCart(cartId) {
@@ -102,6 +126,32 @@ export default class CartsList {
         console.log("this.cartsId_delete=", this.cartsId);
 
         this.renderCarts();
+        this.updateTotalPrice();
+
+    }
+
+    updateTotalPrice() {
+        let totalPrice = 0;
+        let totalProducts = 0;
+
+        for(const key in this.cartsId) {
+            totalProducts += this.cartsId[key];
+
+            const cartObjSearch = this.carts.find(item => item.id === key);
+
+            const price = cartObjSearch.price;
+
+            totalPrice += this.cartsId[key] * price;
+        }
+
+        this.totalPrice = totalPrice;
+        this.totalProducts = totalProducts;
+
+        console.log("this.totalPrice=", this.totalPrice);
+        console.log("this.totalProducts=", this.totalProducts);
+        this.renderPrice();
+     
+        
     }
 
     addEventListenersClose() {
@@ -123,17 +173,12 @@ export default class CartsList {
         this.element.addEventListener("updateamount", event => {
             const cartId = event.detail.cartId;
             const amount = event.detail.amount;
-            // console.log("cartId=", cartId, "amount=", amount);
+         
             this.cartsId[cartId] = amount;
             console.log("this.cartsID=", this.cartsId);
-            // this.deleteCart(cartId);
-        })
 
-        // this.element.addEventListener("updateamount", event => {
-        //     const cartId = event.detail.;
-        //     console.log(11);
-        //     // this.deleteCart(cartId);
-        // })
+            this.updateTotalPrice();
+        })
     }
    
     dispatchEvent() {
