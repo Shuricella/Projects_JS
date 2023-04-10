@@ -14,6 +14,10 @@ export default class Header {
                     <div class="header-cart-bloc">
                         <div class="header-cart-bloc-resicle"><i class="bi bi-cart"></i></div>
                         <p class="header-cart-bloc-text">CART</p>
+
+                        <p class="header-total-roducts">
+                            5
+                        </p>
                     </div>
                 </a>
             </section>

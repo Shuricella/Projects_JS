@@ -92,7 +92,7 @@ export default class CartsList {
 
     renderPrice() {
         const priceBlock = this.element.querySelector('[data-element="total"]');
-        console.log("priceBlock=", priceBlock);
+        // console.log("priceBlock=", priceBlock);
         priceBlock.innerHTML = this.getTemplatePrice();
     }
 
@@ -112,7 +112,6 @@ export default class CartsList {
          console.log("this.cartsId1=", this.cartsId);
 
          this.updateTotalPrice();
-         
     }
 
     deleteCart(cartId) {
@@ -127,7 +126,6 @@ export default class CartsList {
 
         this.renderCarts();
         this.updateTotalPrice();
-
     }
 
     updateTotalPrice() {
@@ -150,8 +148,6 @@ export default class CartsList {
         console.log("this.totalPrice=", this.totalPrice);
         console.log("this.totalProducts=", this.totalProducts);
         this.renderPrice();
-     
-        
     }
 
     addEventListenersClose() {
