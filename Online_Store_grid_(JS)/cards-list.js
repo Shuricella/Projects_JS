@@ -21,7 +21,6 @@ export default class CardsList {
 
         wrapper.innerHTML = this.getTemplate();
         
-        // помещаем элемент в наш обьект
         this.element = wrapper;
     }
 
@@ -34,7 +33,6 @@ export default class CardsList {
 
         const body = this.element.querySelector('[data-element="body"]');
 
-        // очистим контент контейнера под Cards list чистой строчкой
         body.innerHTML = "";
 
         body.append(...cards);
@@ -43,7 +41,7 @@ export default class CardsList {
     update(data = []) {
         // обновим список карточек data
         this.data = data;
-        // console.log(data);
+        
         this.renderCards();
     }
 }

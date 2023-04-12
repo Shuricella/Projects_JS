@@ -3,11 +3,9 @@ export default class Header {
         this.totalProducts = 0;
 
         this.render();
-
         this.renderTotalProducts();
 
         this.addEventListenersCart();
-
         this.initEventListenersTotalProducts();
     }
 
@@ -45,7 +43,6 @@ export default class Header {
         
         wrapper.innerHTML = this.getTemplate();
 
-        // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
     }
 

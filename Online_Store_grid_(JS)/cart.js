@@ -55,9 +55,6 @@ export default class Cart {
                 
             </li>
         `
-        // ${this.state.images[0]}
-        // ${this.state.title}
-        // ${this.state.price}
     }
 
     getTemplateAmount() {
@@ -81,7 +78,6 @@ export default class Cart {
         
         wrapper.innerHTML = this.getTemplate();
 
-        // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
     }
 
@@ -139,13 +135,13 @@ export default class Cart {
 
     dispatchEventDelete(cartId) {
         const deleteButton = new CustomEvent("cartieventdelete", {bubbles:true, detail: cartId});
-        // console.log("idcart=", cartId); bubbles:true,
+        
         this.element.dispatchEvent(deleteButton);
     }
 
     dispatchEventAmount(cartId, amount) {
         const updateAmout = new CustomEvent("updateamount", {bubbles:true, detail:{"cartId":cartId, "amount":amount}});
-        // console.log("idcart=", cartId); bubbles:true,
+        
         this.element.dispatchEvent(updateAmout);
     }
     

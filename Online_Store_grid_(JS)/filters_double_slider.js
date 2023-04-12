@@ -3,8 +3,6 @@ export default class DoubleSlider {
   subElements = {};
 
 
-
-
   onThumbPointerMove = event => {
     event.preventDefault();
 
@@ -50,9 +48,6 @@ export default class DoubleSlider {
     }
   };
 
-
-
-
   onThumbPointerUp = () => {
     this.element.classList.remove('range-slider_dragging');
 
@@ -67,7 +62,6 @@ export default class DoubleSlider {
       }
     }));
   };
-
 
   constructor({
                 min = 100,
@@ -93,23 +87,29 @@ export default class DoubleSlider {
   get template() {
     const { from, to } = this.selected;
     
-    return `<div class="range-slider">
-      <span data-element="from">${this.formatValue(from)}</span>
-      <div data-element="inner" class="range-slider__inner">
-        <span data-element="progress" class="range-slider__progress"></span>
-        <span data-element="thumbLeft" class="range-slider__thumb-left">
-          <svg width="6" height="18" viewBox="0 0 6 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.959114 4.55246L4.65304 0.992556C4.97059 0.686527 5.5 0.911567 5.5 1.35258V16.9297C5.5 17.3481 5.01686 17.5815 4.68917 17.3214L1.06751 14.4471C0.708988 14.1625 0.5 13.7298 0.5 13.2721V5.63253C0.5 5.2251 0.66574 4.83519 0.959114 4.55246Z" fill="white" stroke="#000000"/>
-          </svg>
-        </span>
-        <span data-element="thumbRight" class="range-slider__thumb-right">
-          <svg width="6" height="18" viewBox="0 0 6 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.959114 4.55246L4.65304 0.992556C4.97059 0.686527 5.5 0.911567 5.5 1.35258V16.9297C5.5 17.3481 5.01686 17.5815 4.68917 17.3214L1.06751 14.4471C0.708988 14.1625 0.5 13.7298 0.5 13.2721V5.63253C0.5 5.2251 0.66574 4.83519 0.959114 4.55246Z" fill="white" stroke="#000000"/>
-          </svg>
-        </span>
+    return `
+      <div class="range-slider">
+        <span data-element="from">${this.formatValue(from)}</span>
+
+        <div data-element="inner" class="range-slider__inner">
+          <span data-element="progress" class="range-slider__progress"></span>
+
+          <span data-element="thumbLeft" class="range-slider__thumb-left">
+            <svg width="6" height="18" viewBox="0 0 6 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.959114 4.55246L4.65304 0.992556C4.97059 0.686527 5.5 0.911567 5.5 1.35258V16.9297C5.5 17.3481 5.01686 17.5815 4.68917 17.3214L1.06751 14.4471C0.708988 14.1625 0.5 13.7298 0.5 13.2721V5.63253C0.5 5.2251 0.66574 4.83519 0.959114 4.55246Z" fill="white" stroke="#000000"/>
+            </svg>
+          </span>
+          
+          <span data-element="thumbRight" class="range-slider__thumb-right">
+            <svg width="6" height="18" viewBox="0 0 6 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.959114 4.55246L4.65304 0.992556C4.97059 0.686527 5.5 0.911567 5.5 1.35258V16.9297C5.5 17.3481 5.01686 17.5815 4.68917 17.3214L1.06751 14.4471C0.708988 14.1625 0.5 13.7298 0.5 13.2721V5.63253C0.5 5.2251 0.66574 4.83519 0.959114 4.55246Z" fill="white" stroke="#000000"/>
+            </svg>
+          </span>
+        </div>
+
+        <span data-element="to">${this.formatValue(to)}</span>
       </div>
-      <span data-element="to">${this.formatValue(to)}</span>
-    </div>`;
+    `;
   }
 
   render() {

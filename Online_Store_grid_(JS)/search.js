@@ -26,7 +26,6 @@ export default class Search {
 
         wrapper.innerHTML = this.getTemplate();
 
-        // помещаем элемент в наш обьект
         this.element = wrapper;
     }
 
@@ -38,7 +37,7 @@ export default class Search {
 
     addEventListeners() {
         let search = this.element.querySelector('.wrapper-search-component');
-        // change
+        
         search.addEventListener("change", event => {
             const textField = event.target.closest('.search-text input');
             

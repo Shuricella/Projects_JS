@@ -2,19 +2,15 @@ import DoubleSlider from "./filters_double_slider.js";
 export default class FiltersList {
     constructor(dataCategories = [], dataBrands = []) {
         this.dataCategories = dataCategories;
-
         this.dataBrands = dataBrands;
 
         this.filtersComponents = {};
 
         this.render();
-
         this.renderFiltersComponents();
-
         this.renderCategoriesBrands();
 
         this.addEventListeners();
-
         this.addEventListenersButtonClear();
     }
 
@@ -111,7 +107,6 @@ export default class FiltersList {
 
         wrapper.innerHTML = this.getTemplate();
 
-        // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
     }
 

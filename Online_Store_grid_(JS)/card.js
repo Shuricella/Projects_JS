@@ -58,7 +58,6 @@ export default class Card {
 
         wrapper.innerHTML = this.getTemplate();
 
-        // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
     }
 
@@ -72,8 +71,7 @@ export default class Card {
 
     dispatchEvent(data = {}) {
     const cardEvent = new CustomEvent("cardeventadd", {bubbles:true, detail: data});
-        // console.log(data);
-        // {detail:data}
+        
         this.element.dispatchEvent(cardEvent);
     }
 }

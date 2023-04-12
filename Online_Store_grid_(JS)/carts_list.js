@@ -72,7 +72,6 @@ export default class CartsList {
         
         wrapper.innerHTML = this.getTemplate();
 
-        // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
     }
 
@@ -91,7 +90,7 @@ export default class CartsList {
 
     renderPrice() {
         const priceBlock = this.element.querySelector('[data-element="total"]');
-        // console.log("priceBlock=", priceBlock);
+        
         priceBlock.innerHTML = this.getTemplatePrice();
     }
 

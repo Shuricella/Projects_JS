@@ -5,7 +5,6 @@ export default class Pagination {
         this.totalPages = totalPages;
 
         this.render();
-
         this.renderPages();
 
         this.addEventListeners();
@@ -100,7 +99,6 @@ export default class Pagination {
         
         wrapper.innerHTML = this.getTemplate();
 
-        // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
     }
 
