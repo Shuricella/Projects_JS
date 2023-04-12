@@ -1,5 +1,7 @@
 :root {
     --color-hover: #00008B;
+    --color-active: #584fa9;
+
     --color-decor: #7E72F2;
     --color-base: #FFFFFF;
 }
@@ -25,4 +27,9 @@
 
 .butto-clear:hover {
     background: var(--color-hover);
+    transition: .5s;
+}
+.butto-clear:active {
+    background: var(--color-active);
+    transition: none;
 }

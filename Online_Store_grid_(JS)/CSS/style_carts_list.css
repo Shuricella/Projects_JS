@@ -2,11 +2,14 @@
     --color-text: #000000;
     --color-box-shadow: #555;
     --color-decor: #7E72F2;
-    --color-hover-add: #00008B;
     --color-base: #FFFFFF;
 
-    --font-cart-list: 'Montserrat', sans-serif;
+    --carts-hover-total: #808080;
+    --carts-active-total: #584fa9;
+
+    --color-hover-add: #00008B;
     
+    --font-cart-list: 'Montserrat', sans-serif;
 }
 
 .text-cart-list {
@@ -15,21 +18,7 @@
 
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.4);
-  }
-
-/* .modal {
-    background: rgba(0,0,0,.4);
-    
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    
-    display: flex;
-    align-items: center;
-} */
+}
 
 .modal {
     border-radius: 15px;
@@ -40,14 +29,14 @@ dialog::backdrop {
 .wrapper-cart-list {
     outline: 1px solid;
     margin: 0 auto;
-    max-width: 1200px;
-    /* overflow-y: scroll; */
+    max-width: 1300px;
+    min-width: 530px;
     
     background-color: #fefefe;
 }
 
 .header-close {
-    outline: 1px solid;
+    /* outline: 1px solid; */
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -118,6 +107,22 @@ dialog::backdrop {
         background-color: transparent; 
     }
 
+        .amount-product i {
+            cursor: pointer; 
+        }
+
+        .amount-product i:hover {
+            background: var(--carts-hover-total);
+            color: var(--color-base);
+            transition: .5s;
+        }
+
+        .amount-product i:active {
+            background: var(--carts-active-total);
+            color: var(--color-base);
+            transition: none;
+        }
+
     .amount-product p {
         margin: 0px 0px 0px 0px;
         padding: 0px 3px 0px 3px;
@@ -147,6 +152,16 @@ dialog::backdrop {
         background-color: transparent; 
     }
 
+        .delete-title i {
+            cursor: pointer;
+        }
+
+        .delete-title i:hover {
+            background-color: #B0E0E6;
+            
+            transition: .5s;
+        }
+        
     .cart-total {
         display: flex;
         justify-content: center;
@@ -176,6 +191,8 @@ dialog::backdrop {
         padding: 0px 0px 10px 0px;
     }
 
+        .order-button button {cursor: pointer; }
+
         .order-button button {
             width: 200px;
             border-radius: 3px 3px 3px 3px;
@@ -189,5 +206,9 @@ dialog::backdrop {
 
         .order-button button:hover {
             background-color: var(--color-hover-add);
-            transition: .3s;
+            transition: .5s;
+        }
+        .order-button button:active {
+            background-color: var(--carts-active-total);
+            transition: none;
         }

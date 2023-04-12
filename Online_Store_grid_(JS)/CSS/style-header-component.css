@@ -1,7 +1,9 @@
 :root {
     --color-decor: #7E72F2;
-    --color-hover: #00008B;
     --color-base: #FFFFFF;
+
+    --color-hover: #00008B;
+    --color-active: #584fa9;
 }
 
     .header-components {
@@ -10,7 +12,6 @@
         align-items: center;
         width: 100%;
         padding: 20px 0px 0px 0px;
-        /* height: 80px; */
     }
         .header-text-onlstore {
             display: flex;
@@ -65,6 +66,20 @@
 
             .header-cart:hover {
                 background: var(--color-hover);
+                transition: .5s;
+            }
+            .header-cart:active {
+                background: var(--color-hover);
+                transition: none;
+            }
+
+            .header-total-roducts {
+                display: flex;
+                align-items: center;
+                margin: 0 0 0 3px;
+                
+                font-size: 14px;
+                color: var(--color-base);
             }
 
     

@@ -1,8 +1,14 @@
 export default class Header {
     constructor() {
+        this.totalProducts = 0;
+
         this.render();
 
+        this.renderTotalProducts();
+
         this.addEventListenersCart();
+
+        this.initEventListenersTotalProducts();
     }
 
     getTemplate() {
@@ -16,11 +22,21 @@ export default class Header {
                         <p class="header-cart-bloc-text">CART</p>
 
                         <p class="header-total-roducts">
-                            5
+
+                            <!--Total products-->
+
                         </p>
                     </div>
                 </a>
             </section>
+        `;
+    }
+
+    getTemplateTotalProducts() {
+        return `
+            <div>
+                ${this.totalProducts}
+            </div>
         `;
     }
 
@@ -31,6 +47,17 @@ export default class Header {
 
         // помещаем элемент в наш обьект
         this.element = wrapper.firstElementChild;
+    }
+
+    renderTotalProducts() {
+        const totalProductsBlock = this.element.querySelector('.header-total-roducts');
+
+        if(this.totalProducts > 0) {
+            totalProductsBlock.innerHTML = this.getTemplateTotalProducts();
+        }
+        else{
+            totalProductsBlock.innerHTML = "";
+        }
     }
 
     addEventListenersCart() {
@@ -45,5 +72,15 @@ export default class Header {
         const cartsListEvent = new CustomEvent("cartslistevent");
 
         this.element.dispatchEvent(cartsListEvent);
+    }
+
+    initEventListenersTotalProducts() {
+        document.addEventListener("cartieventtotalproducts", event => {
+            const totalProducts = event.detail;
+            
+            this.totalProducts = totalProducts;
+            
+            this.renderTotalProducts();
+        })
     }
 }
