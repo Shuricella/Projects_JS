@@ -18,8 +18,8 @@ body {
   /* outline: 1px solid; */
   background: var(--color-base);
 
-  height: 460px;
-  max-width: 460px;
+  /* height: 460px; */
+  max-width: 490px;
 
   display: grid;
   grid-template-columns: 1fr;
