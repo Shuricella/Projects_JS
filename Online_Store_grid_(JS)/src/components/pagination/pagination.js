@@ -41,9 +41,6 @@ export default class Pagination {
     }
 
     getPages() {
-        // Создадим массив Array с кол-ом элеменотов defaultPagesSize и заполним его 1
-        // map вернет нам новый массив с элементами pagination через запятую
-        
         return `
             <ul class="page-list non-styles" data-element="pagination">
                 ${new Array(this.totalPages).fill(1).map((item, index) => {
@@ -108,7 +105,7 @@ export default class Pagination {
     }
     
     update(totalPages) {
-        // обновим список карточек data
+        // update cards list
         this.totalPages = totalPages;
         
         this.renderPages();
@@ -124,19 +121,15 @@ export default class Pagination {
 
        pagesList.addEventListener("click", event => {
             const pageItem = event.target.closest('.krug');
-            // pageItem результатом будет вывод в консоле элемента по которому кликнуил, если попали по этому элементу
             
             if(pageItem === null) return;
             
             const pageIndex = pageItem.dataset.pageIndex;
-            // можно через детруктурирование const {pageIndex} = pageItem.dataset;
             // dataset выдает все дата атрибуты на данном элементе
             // из дата атрибутов приходят результаты в виде строчки. Необходимо преобразовать в цифры через parseInt(value, 10)
             
             this.setPage(parseInt(pageIndex, 10));
        });
-
-       
     }
     
     dispatchEvent(pageIndex) {
