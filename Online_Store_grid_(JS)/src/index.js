@@ -61,6 +61,8 @@ export default class OnlineStorePage {
         const response = await fetch(this.urlProducts);
         const products = await response.json();
 
+        const totalCount = parseInt(response.headers.get('X-Total-Count'));
+        console.log("totalCount_react=", totalCount);
         // fetch(url)
         // .then(response => response.json())
         // .then(products => {
