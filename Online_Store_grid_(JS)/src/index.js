@@ -1,10 +1,17 @@
 // В этой компоненте будет вся логика от всей страницы и другие компоненты
-import Header from "./header.js";
-import CardsList from "./cards-list.js";
-import Pagination from "./pagination.js";
-import FiltersList from "./filters_list.js";
-import Search from "./search.js";
-import CartsList from "./carts_list.js";
+import Header from "./components/header/header.js";
+import CardsList from "./components/cards-list/cards-list.js";
+import Pagination from "./components/pagination/pagination.js";
+import FiltersList from "./components/filters-list/filters_list.js";
+import Search from "./components/search/search.js";
+import CartsList from "./components/carts-list/carts_list.js";
+
+// import Header from "./header.js";
+// import CardsList from "./cards-list.js";
+// import Pagination from "./pagination.js";
+// import FiltersList from "./filters_list.js";
+// import Search from "./search.js";
+// import CartsList from "./carts_list.js";
 
 // products?_page=1&_limit=9
 const backendUrl = `https://online-store.bootcamp.place/api/`;

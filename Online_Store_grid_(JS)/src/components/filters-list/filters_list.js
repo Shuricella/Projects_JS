@@ -1,4 +1,6 @@
-import DoubleSlider from "./filters_double_slider.js";
+import DoubleSlider from "../../ui/double-slider/filters_double_slider.js";
+// import DoubleSlider from "./filters_double_slider.js";
+
 export default class FiltersList {
     constructor(dataCategories = [], dataBrands = []) {
         this.dataCategories = dataCategories;

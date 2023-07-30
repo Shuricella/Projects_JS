@@ -1,4 +1,5 @@
-import Cart from "./cart.js";
+import Cart from "../cart/cart.js";
+// import Cart from "./cart.js";
 
 export default class CartsList {
     constructor() {

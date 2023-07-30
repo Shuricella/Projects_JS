@@ -1,4 +1,5 @@
-import Card from "./card.js";
+import Card from "../card/card.js";
+// import Card from "./card.js";
 
 export default class CardsList {
     constructor(data = []) {
