@@ -8,6 +8,8 @@ export default class Cart {
         this.renderAmount();
         this.renderPrice();
 
+        this.isErrorImage();
+
         this.addEventListeners();
     }
 
@@ -71,6 +73,14 @@ export default class Cart {
                 ${this.state.price * this.amount}
             </p>
         `;
+    }
+
+    isErrorImage() {
+        const imgBlock = this.element.querySelector('.cart-img img');
+        
+        imgBlock.onerror = function(error) {
+            imgBlock.src = "../../../publick/wolf.jpg";
+        };
     }
 
     render() {
