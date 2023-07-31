@@ -1,5 +1,4 @@
 import Card from "../card/card.js";
-// import Card from "./card.js";
 
 export default class CardsList {
     constructor(data = []) {
@@ -12,7 +11,7 @@ export default class CardsList {
     getTemplate() {
         return `
                 <div class="item-main-cards" data-element="body">
-                <!--Cards list-->
+                    <!--Cards list-->
                 </div>
         `;
     }
@@ -40,7 +39,6 @@ export default class CardsList {
     }
 
     update(data = []) {
-        // обновим список карточек data
         this.data = data;
         
         this.renderCards();

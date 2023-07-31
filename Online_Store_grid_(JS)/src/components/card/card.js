@@ -4,17 +4,18 @@ export default class Card {
 
         this.myRender();
 
+        this.isErrorImage();
+
         this.addEventListeners();
     }
-
+                          
     getTemplate() {
         return `
             <main class="wrapper-card">
 
                 <section class="block-img">
                 <!-- height="200" -->
-                <img src="${this.state.images[0]}" alt="${this.state.category}: ${this.state.brand}">
-
+                    <img src="${this.state.images[0]}" alt="${this.state.category}: ${this.state.brand}">
                 </section>
 
                 <section class="block-rating-price">
@@ -48,6 +49,14 @@ export default class Card {
         `;
     }
 
+    isErrorImage() {
+        const imgBlock = this.element.querySelector('.block-img img');
+        
+        imgBlock.onerror = function(error) {
+            imgBlock.src = "../../../publick/wolf.jpg";
+        };
+    }
+
     update(data = {}) {
         this.state = data;
         this.element.innerHTML = this.getTemplate();
@@ -74,4 +83,4 @@ export default class Card {
         
         this.element.dispatchEvent(cardEvent);
     }
-}
+};

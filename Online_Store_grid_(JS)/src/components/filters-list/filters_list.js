@@ -1,5 +1,4 @@
 import DoubleSlider from "../../ui/double-slider/filters_double_slider.js";
-// import DoubleSlider from "./filters_double_slider.js";
 
 export default class FiltersList {
     constructor(dataCategories = [], dataBrands = []) {
@@ -182,7 +181,6 @@ export default class FiltersList {
     }
 
     update(dataCategories = [], dataBrands = []) {
-        // обновим список карточек data
         this.dataCategories = dataCategories;
         this.dataBrands = dataBrands;
 

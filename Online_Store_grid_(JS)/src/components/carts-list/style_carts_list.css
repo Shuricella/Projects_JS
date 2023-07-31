@@ -30,7 +30,7 @@ dialog::backdrop {
     outline: 1px solid;
     margin: 0 auto;
     max-width: 1300px;
-    min-width: 530px;
+    min-width: 1100px;
     
     background-color: #fefefe;
 }
